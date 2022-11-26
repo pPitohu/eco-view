@@ -40,7 +40,7 @@ module.exports = {
     'indent': [ 'error', 2 ],
     'keyword-spacing': [ 'error', { 'after': true, 'before': true }],
     'max-len': [ 'error', {
-      'code': 80,
+      'code': 100,
       'ignoreComments': true,
       'ignoreRegExpLiterals': true,
       'ignoreStrings': true,
@@ -49,13 +49,6 @@ module.exports = {
       'ignoreUrls': true,
       'tabWidth': 2,
     }],
-    'max-lines': [
-      'error', {
-        'max': 300,
-        'skipBlankLines': true,
-        'skipComments': true,
-      },
-    ],
     'no-multi-spaces': 'error',
     'no-multiple-empty-lines': [ 'error', { 'max': 1 }],
     'no-prototype-builtins': 'off',
@@ -64,8 +57,8 @@ module.exports = {
       'objectsInObjects': false,
     }],
     'quotes': [ 'error', 'single' ],
-    'semi': [ 'error', 'always' ],
+    'semi': [ 'error', 'never' ],
     'sort/type-properties': ['error'],
     'space-before-blocks': 'error',
   },
-};
+}
