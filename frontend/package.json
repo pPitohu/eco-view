@@ -1,6 +1,7 @@
 {
   "name": "eco-view-client",
   "version": "1.0.0",
+  "license": "ISC",
   "scripts": {
     "dev": "vite --host",
     "build": "run-p type-check build-only",
@@ -38,6 +39,6 @@
     "vue-tsc": "^1.0.8"
   },
   "lint-staged": {
-    "*.(js|ts|vue)": "eslint --cache --fix -c .eslintrc.js"
+    "*.(js|ts|vue)": "npm run lint"
   }
 }
