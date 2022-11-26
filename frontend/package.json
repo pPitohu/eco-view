@@ -2,6 +2,7 @@
   "name": "eco-view-client",
   "version": "1.0.0",
   "license": "ISC",
+  "author": "pPitohu (Gleb)",
   "scripts": {
     "dev": "vite --host",
     "build": "run-p type-check build-only",

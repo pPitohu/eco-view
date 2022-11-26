@@ -2,7 +2,7 @@
   "name": "eco-view-server",
   "version": "1.0.0",
   "main": "server.js",
-  "author": "Gleb Kruchok",
+  "author": "pPitohu (Gleb)",
   "license": "ISC",
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
