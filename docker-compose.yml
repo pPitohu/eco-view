@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./backend
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app/
+      # - /app/node_modules # uncomment this line if you want to use the node_modules from the host
+    command: 
+      - ts-node-dev
+      - ./src/server.ts
+    depends_on:
+      - db
+
+  frontend:
+    depends_on:
+      - backend
+    build:
+      context: ./frontend
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app/
+      # - /app/node_modules # uncomment this line if you want to use the node_modules from the host
+    command:
+      - npm
+      - run
+      - dev
+    
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017
