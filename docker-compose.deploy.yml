@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    image: pitohu/eco-view:eco-view-server
+    build: 
+      context: ./backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+
+  frontend:
+    image: pitohu/eco-view:eco-view-client
+    depends_on:
+      - backend
+    ports:
+      - 80:8080
+    
+  db:
+    image: mongo:latest
+    ports:
+      - 27017:27017

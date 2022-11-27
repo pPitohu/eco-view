@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   backend:
+    image: pitohu/eco-view:eco-view-server
     build: 
       context: ./backend
     ports:
@@ -16,6 +17,7 @@ services:
       - db
 
   frontend:
+    image: pitohu/eco-view:eco-view-client
     depends_on:
       - backend
     build:
