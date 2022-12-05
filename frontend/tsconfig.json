@@ -13,7 +13,6 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true,
     "useUnknownInCatchVariables": false,
-    "isolatedModules": true
   },
 
   "references": [

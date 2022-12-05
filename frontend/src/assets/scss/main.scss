@@ -5,3 +5,8 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+.Vue-Toastification__slideBlurred-enter-active,
+.Vue-Toastification__slideBlurred-leave-active {
+  animation-duration: .45s !important;
+}

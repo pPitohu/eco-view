@@ -27,7 +27,6 @@ module.exports = {
       'singleValue': false,
     }],
     'arrow-parens': [ 'error', 'as-needed' ],
-    'comma-dangle': [ 'error', 'always-multiline' ],
     'eqeqeq': [ 'error', 'always' ],
     'eol-last': [ 'error', 'always' ],
     'indent': [ 'error', 2 ],
@@ -53,7 +52,7 @@ module.exports = {
     }],
     'prefer-const': 'off',
     'quotes': [ 'error', 'single' ],
-    'sort/type-properties': ['error'],
+    // 'sort/type-properties': ['error'],
     'semi': [ 'error', 'never' ],
     'space-before-blocks': 'error',
     'space-in-parens': [ 'error', 'never' ],
@@ -62,5 +61,6 @@ module.exports = {
     'vue/no-mutating-props': 'error',
     'vue/no-setup-props-destructure': 'error',
     'vue/valid-next-tick': 'warn',
+    'vue/multi-word-component-names': 0, 
   },
 }

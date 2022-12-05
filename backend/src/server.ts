@@ -1,18 +1,20 @@
 import bodyParser from 'body-parser'
-import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import * as dotenv from 'dotenv'
-import express, { Application, NextFunction, Request, Response } from 'express'
+import express, { Application, NextFunction, Request, Response, Router } from 'express'
 import mongoose from 'mongoose'
+import AuthRouter from './routes/auth'
 dotenv.config()
 
 const app: Application = express()
+const router: Router = Router()
 const PORT = process.env.PORT || 3000
 
-app.use(cors({ origin: process.env.CLIENT_URL }))
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
-  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL)
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE')
   res.header(
     'Access-Control-Allow-Headers',
@@ -21,10 +23,12 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   next()
 })
 
-app.get('/', (req: Request, res: Response): Response => res.send(process.env.CLIENT_URL))
+router.use('/auth', AuthRouter)
+
+app.use(router)
 
 mongoose.connect(
-  'mongodb://db:27017/eco-view',
+  process.env.MONGO_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

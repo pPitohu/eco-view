@@ -20,6 +20,7 @@ module.exports = {
   plugins: [
     'sort',
     '@typescript-eslint',
+    'unused-imports',
   ],
   rules: {
     '@typescript-eslint/ban-ts-comment': 'off',
@@ -34,7 +35,6 @@ module.exports = {
       'singleValue': false,
     }],
     'arrow-parens': [ 'error', 'as-needed' ],
-    'comma-dangle': [ 'error', 'always-multiline' ],
     'eol-last': [ 'error', 'always' ],
     'eqeqeq': [ 'error', 'always' ],
     'indent': [ 'error', 2 ],
@@ -60,5 +60,6 @@ module.exports = {
     'semi': [ 'error', 'never' ],
     'sort/type-properties': ['error'],
     'space-before-blocks': 'error',
+    'unused-imports/no-unused-imports': 'warn',
   },
 }
