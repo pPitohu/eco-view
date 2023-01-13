@@ -3,8 +3,6 @@ version: '3.8'
 services:
   backend:
     image: pitohu/eco-view:eco-view-server
-    env_file:
-      - .env
     build: 
       context: ./backend
     ports:
@@ -22,8 +20,6 @@ services:
     image: pitohu/eco-view:eco-view-client
     depends_on:
       - backend
-    env_file:
-      - .env.local
     build:
       context: ./frontend
     ports:
