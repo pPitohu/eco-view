@@ -1,3 +1,11 @@
-a {
-  margin-left: 10px;
+.fade-in-bottom {
+  &-enter-active,
+  &-leave-active {
+    transition: $default-transition;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }

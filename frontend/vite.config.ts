@@ -32,10 +32,19 @@ export default () => {
     },
     server: {
       host: '0.0.0.0',
-      port: +env.VITE_CLIENT_PORT,
+      port: +env.VITE_CLIENT_PORT || 8080,
       watch: {
         usePolling: true,
       },
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @import "@/assets/scss/variables.scss";
+          `,
+        }
+      }
+    }
   })
 }

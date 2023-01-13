@@ -1,0 +1,48 @@
+.authorization-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  
+  .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 11;
+    cursor: pointer;
+  }
+}
+
+.fade-in-bottom {
+  &-enter-active {
+    animation: bouncy $default-transition forwards;
+    animation-duration: .7s;
+  }
+  &-leave-active {
+    animation: bouncy $default-transition forwards reverse;
+    animation-duration: .7s;
+  }
+}
+
+@keyframes bouncy {
+  0% {
+    opacity: .3;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: .8;
+    transform: translateY(55px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

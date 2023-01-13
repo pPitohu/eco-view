@@ -1,0 +1,7 @@
+.wrapper {
+  z-index: 100;
+  .register {
+    z-index: inherit;
+    animation: bouncyFadeInBottom .8s ease-in-out forwards;
+  }
+}
