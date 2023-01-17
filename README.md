@@ -8,4 +8,4 @@ Here is used:
  - **Mongo** as db with **Mongoose ODM**
  - **Docker** to make everything centralized in one container and easy to use
 
-Deployed to [aws](http://ec2-34-229-96-31.compute-1.amazonaws.com/) on ec2 via docker compose
+Deployed to kamatera
