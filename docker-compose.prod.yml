@@ -5,8 +5,6 @@ services:
     image: pitohu/eco-view:eco-view-server
     ports:
       - 3000:3000
-    depends_on:
-      - db
 
   frontend:
     image: pitohu/eco-view:eco-view-client
@@ -14,8 +12,3 @@ services:
       - 80:8080
     depends_on:
       - backend
-    
-  db:
-    image: mongo:latest
-    ports:
-      - 27017:27017

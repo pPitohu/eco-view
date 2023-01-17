@@ -1,19 +1,19 @@
 import * as yup from 'yup'
 
 export const passwordRules = yup
-  .string()
+  .string().trim('Нельзя использовать пробелы')
   .required('Обязательное поле')
   .min(8, 'Минимум 8 символов')
   .nullable()
 
 export const emailRules = yup
-  .string()
+  .string().trim('Нельзя использовать пробелы')
   .required('Обязательное поле')
   .email('Некорректный email')
   .nullable()
 
 export const userNameRules = yup
-  .string()
+  .string().trim('Нельзя использовать пробелы')
   .required('Обязательное поле')
   .min(3, 'Минимум 3 символа')
   .max(20, 'Максимум 20 символов')
