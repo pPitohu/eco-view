@@ -1,7 +1,55 @@
 .wrapper {
-  z-index: 100;
+  z-index: 12;
+  padding: 10px 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 640px;
+    border-radius: 30px;
+    padding: 35px 60px;
+    background: rgba(66, 106, 140, 0.55);
+    backdrop-filter: blur(10px);
+    filter: drop-shadow(0px 4px 12px #48D9A4);
     z-index: inherit;
     animation: bouncyFadeInBottom .8s ease-in-out forwards;
+    .heading {
+      margin: 25px auto 60px;
+      width: fit-content;
+    }
+    &-form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 500px;
+      &__field:not(:nth-child(4)) {
+        margin-bottom: 30px;
+      }
+      &__button {
+        margin: 40px 0 0;
+      }
+    }
+    &-links {
+      margin: 50px 0 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      .helper-text {
+        font-size: 22px;
+        font-weight: 600;
+        color: white;
+      }
+      &__link {
+        font-size: 22px;
+        font-weight: 600;
+        color: $primaryColor;
+      }
+    }
   }
 }

@@ -1,6 +1,5 @@
 import { ref } from 'vue'
-import { TYPE } from 'vue-toastification'
-import { fireToast } from '@/plugins/toast'
+import { registerFormValidator } from '@/components/common/TextField/TextFieldRules'
 import { useUserStore } from '@/stores/UserStore/UserStore'
 
 const useRegister = () => {
@@ -11,13 +10,12 @@ const useRegister = () => {
   const password = ref('')
   const confirmPassword = ref('')
 
-  const register = async () => {
-    if (password.value !== confirmPassword.value)
-      return fireToast(TYPE.ERROR, 'Пароли не совпадают!')
+  const register = async values => {
+    const { email, password, username } = values
     await userStore.register({
-      email: email.value,
-      username: username.value,
-      password: password.value,
+      email: email,
+      username: username,
+      password: password,
     })
   }
 
@@ -26,7 +24,8 @@ const useRegister = () => {
     username,
     password,
     confirmPassword,
-    register
+    register,
+    registerFormValidator
   }
 }
 

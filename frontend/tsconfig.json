@@ -6,6 +6,7 @@
     "target": "esnext",
     "module": "CommonJS",
     "strict": true,
+    "noImplicitAny": false,
     "moduleResolution": "node",
     "paths": {
       "@/*": ["./src/*"]

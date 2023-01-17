@@ -4,14 +4,18 @@
       <h1 class="heading h1">
         Вход
       </h1>
-      <VeeForm class="login-form">
+      <VeeForm
+        v-slot="{ meta }"
+        class="login-form"
+        :validation-schema="loginFormValidator"
+        @submit="login"
+      >
         <TextField
           class="login-form__field"
           name="email"
           placeholder="Email"
           type="email"
           large
-          :rules="emailRules"
         />
         <TextField
           class="login-form__field"
@@ -19,10 +23,13 @@
           placeholder="Пароль"
           type="password"
           large
-          :rules="passwordRules"
-          @input="login"
         />
-        <BaseButton class="login-form__button">
+        <BaseButton
+          :disabled="!meta.valid"
+          class="login-form__button"
+          large
+          type="submit"
+        >
           Войти
           <template #appendIcon>
             <img

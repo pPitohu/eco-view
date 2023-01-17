@@ -4,7 +4,7 @@
       class="logo"
       @click="() => $router.push({ name: 'home' })"
     />
-    <TopRightLeafs />
+    <TopLeftLeafs />
 
     <router-view v-slot="{ Component }">
       <transition
@@ -25,13 +25,13 @@
 import BackgroundSVG from '@/components/icons/LoginBackground.vue'
 import LogoStroke from '@/components/icons/LogoStroke.vue'
 import BottomRightLeafs from './BottomRightLeafs.vue'
-import TopRightLeafs from './TopRightLeafs.vue'
+import TopLeftLeafs from './TopLeftLeafs.vue'
 
 export default {
   components: {
     BackgroundSVG,
     LogoStroke,
-    TopRightLeafs,
+    TopLeftLeafs,
     BottomRightLeafs,
   },
 }

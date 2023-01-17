@@ -1,7 +1,12 @@
 <template>
-  <div class="button-wrapper">
+  <div
+    class="button-wrapper"
+    :class="{
+      'large': large
+    }"
+  >
     <button
-      v-wave
+      v-wave="!disabled"
       class="button"
       :class="{
         'appended-icon': $slots.appendIcon,
@@ -28,6 +33,11 @@ export default {
       default: 'button',
     },
     disabled: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    large: {
       type: Boolean,
       required: false,
       default: false,
