@@ -5,22 +5,19 @@ import type { UserState } from './types'
 
 const userStore = () => {
   const user = ref<UserState>({
-    _id: null,
+    id: null,
     email: null,
     username: null,
     createdAt: null,
     updatedAt: null,
     role: null
   })
-
-  const token = ref<string>()
   
-  const isAuthorized = computed((): boolean => Boolean(user.value._id))
+  const isAuthorized = computed((): boolean => Boolean(user.value.id))
 
   return {
     user,
     isAuthorized,
-    token,
     ...actions
   }
 }

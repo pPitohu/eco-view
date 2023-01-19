@@ -8,6 +8,7 @@
         v-slot="{ meta }"
         class="register-form"
         :validation-schema="registerFormValidator"
+        @submit="register"
       >
         <TextField
           class="register-form__field"

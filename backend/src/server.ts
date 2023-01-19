@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser'
 import * as dotenv from 'dotenv'
 import express, { Application, NextFunction, Request, Response, Router } from 'express'
 import mongoose from 'mongoose'
-import AuthRouter from './routes/auth'
+import UserRouter from './routes/user'
 dotenv.config()
 
 const app: Application = express()
@@ -23,7 +23,7 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   next()
 })
 
-router.use('/auth', AuthRouter)
+router.use('/user', UserRouter)
 
 app.use(router)
 

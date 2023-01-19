@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { registerFormValidator } from '@/components/common/TextField/TextFieldRules'
-import { useUserStore } from '@/stores/UserStore/UserStore'
+import router from '@/router'
+import { useUserStore } from '@/stores/UserStore'
 
 const useRegister = () => {
   const userStore = useUserStore()
@@ -12,11 +13,12 @@ const useRegister = () => {
 
   const register = async values => {
     const { email, password, username } = values
-    await userStore.register({
+    const { error } = await userStore.register({
       email: email,
       username: username,
       password: password,
     })
+    if (!error) router.push({ name: 'home' })
   }
 
   return {

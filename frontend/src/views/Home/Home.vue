@@ -1,5 +1,10 @@
 <template>
-  <div>hello from Home.vue</div>
+  <div
+    v-for="item in Object.entries(userStore.user)"
+    :key="item"
+  >
+    {{ item }}
+  </div>
 </template>
 
 <script lang="ts">

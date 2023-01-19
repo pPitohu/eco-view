@@ -16,7 +16,7 @@ export const authorize = (roles: UserRoles[]) =>
       }
     
       const decrypt = verify(token, process.env.JWT_SECRET)
-      const user = await User.findById(decrypt.id)
+      const user = await User.findById(decrypt._id)
       req.body.user = user
 
       if (user.role === UserRoles.ADMIN) return next()

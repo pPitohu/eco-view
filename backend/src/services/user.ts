@@ -4,7 +4,8 @@ import { ApiError } from '../helpers/apiError'
 import User from '../models/User'
 
 enum ResponseTexts {
-  UserAlreadyExists = 'Пользователь с такими данными уже существует',
+  UserEmailAlreadyExists = 'Пользователь с таким email уже существует',
+  UserUsernameAlreadyExists = 'Пользователь с таким логином уже существует',
   UnknownError = 'Неизвестная ошибка',
   UserNotFound = 'Пользователь не найден',
   PasswordIsInvalid = 'Неверный пароль',
@@ -16,20 +17,36 @@ const generateLifeTime = (days: number) => {
   return milisecondsInHour * hoursInDay * days
 }
 
-export class AuthService {
+const createToken = (payload: object) => {
+  return jwt.sign(
+    payload,
+    process.env.JWT_SECRET,
+    { expiresIn: generateLifeTime(100) }
+  )
+}
+
+export class UserService {
   public static register = async ({ email, password, username }: {
     email: string;
     password: string;
     username: string;
    }) => {
-    const isUserExists = await User.findOne({ $or: [{ email }, { username }]})
-    if (isUserExists)
-      throw ApiError.BadRequest(ResponseTexts.UserAlreadyExists)
+    const isUserEmailExists = await User.findOne({ email })
+    if (isUserEmailExists)
+      throw ApiError.BadRequest(ResponseTexts.UserEmailAlreadyExists)
+    
+    const isUserUsernameExists = await User.findOne({ username })
+    if (isUserUsernameExists)
+      throw ApiError.BadRequest(ResponseTexts.UserUsernameAlreadyExists)
       
     const passwordSalt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, passwordSalt)
+
     const user = await User.create({ email, password: hashedPassword, username })
-    return user
+
+    const token = createToken(user.toJSON())
+
+    return { token }
   }
 
   public static login = async ({ email, password }: {
@@ -38,17 +55,19 @@ export class AuthService {
   }) => {
     const user = await User.findOne({ email })
     if (!user)
-      throw ApiError.NotFound(ResponseTexts.UserNotFound)
+      throw ApiError.BadRequest(ResponseTexts.UserNotFound)
       
     const isPasswordValid = await bcrypt.compare(password, user.password)
     if (!isPasswordValid)
       throw ApiError.UnprocessableEntity(ResponseTexts.PasswordIsInvalid)
       
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: generateLifeTime(100) }
-    )
+    const token = createToken(user.toJSON())
+
+    return { token, user }
+  }
+
+  public static getMe = async (user: any) => {
+    const token = createToken(user.toJSON())
     return { token }
   }
 } 

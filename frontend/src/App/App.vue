@@ -14,7 +14,9 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import Loader from '@/components/Loader/Loader.vue'
+import { useUserStore } from '@/stores/UserStore'
 
+const userStore = useUserStore()
 const isShowLoader = ref(true)
 const isPageHidden = ref(true)
 
@@ -25,6 +27,9 @@ const togglePageHidden = () => {
   }, 2000)
 }
 onMounted(() => {
+  if (!userStore.isAuthorized)
+    userStore.getCurrentUser()
+  
   document.onreadystatechange = () => {
     if (document.readyState === 'complete')
       setTimeout(togglePageHidden, 1000)

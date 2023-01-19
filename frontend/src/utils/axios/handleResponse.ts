@@ -26,8 +26,9 @@ export const handleResponse = ({
     router.replace({ name: 'not-found' })
     break
   case 500:
-    fireToast(TYPE.ERROR, 'Произошла внутренняя ошибка!')
+    fireToast(TYPE.ERROR, 'Произошла внутренняя ошибка')
     break
   default:
+    fireToast(TYPE.ERROR, data)
   }
 }
