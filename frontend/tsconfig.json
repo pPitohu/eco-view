@@ -4,11 +4,10 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ESNext",
-    "module": "CommonJS",
+    "module": "ESNext",
     "strict": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "sourceMap": true,
     "paths": {
       "@/*": ["./src/*"]
     },
