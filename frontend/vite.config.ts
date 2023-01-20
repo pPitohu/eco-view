@@ -2,7 +2,6 @@ import vue from '@vitejs/plugin-vue'
 
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
-import babel from 'vite-plugin-babel'
 
 // https://vitejs.dev/config/
 export default () => {
@@ -10,20 +9,20 @@ export default () => {
   return defineConfig({
     plugins: [
       vue(),
-      env.VITE_NODE_ENV !== 'production' && babel({
-        babelConfig: {
-          babelrc: false,
-          configFile: false,
-          presets: [
-            '@vue/cli-plugin-babel/preset',
-            '@babel/preset-env',
-          ],
-          plugins: [
-            '@babel/plugin-proposal-optional-chaining',
-            '@babel/plugin-proposal-nullish-coalescing-operator',
-          ],
-        },
-      }),
+      // babel({
+      //   babelConfig: {
+      //     babelrc: false,
+      //     configFile: false,
+      //     presets: [
+      //       '@vue/cli-plugin-babel/preset',
+      //       '@babel/preset-env',
+      //     ],
+      //     plugins: [
+      //       '@babel/plugin-proposal-optional-chaining',
+      //       '@babel/plugin-proposal-nullish-coalescing-operator',
+      //     ],
+      //   },
+      // }),
     ],
     resolve: {
       alias: {
