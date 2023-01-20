@@ -23,7 +23,7 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
   next()
 })
 
-router.use('/user', UserRouter)
+router.use('/api/user', UserRouter)
 
 app.use(router)
 
