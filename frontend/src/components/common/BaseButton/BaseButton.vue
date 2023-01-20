@@ -25,12 +25,14 @@
 </template>
 
 <script lang="ts">
+import type { ButtonHTMLAttributes } from 'vue'
+
 export default {
   props: {
     type: {
-      type: String,
+      type: String as () => ButtonHTMLAttributes['type'],
       required: false,
-      default: 'button',
+      default: 'button'
     },
     disabled: {
       type: Boolean,

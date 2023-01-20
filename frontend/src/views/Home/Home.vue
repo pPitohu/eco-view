@@ -1,7 +1,7 @@
 <template>
   <div
     v-for="item in Object.entries(userStore.user)"
-    :key="item"
+    :key="item[0]"
   >
     {{ item }}
   </div>
