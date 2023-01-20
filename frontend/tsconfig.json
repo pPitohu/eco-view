@@ -3,7 +3,7 @@
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.ts"],
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "esnext",
+    "target": "ES2015",
     "module": "CommonJS",
     "strict": true,
     "noImplicitAny": false,
@@ -13,7 +13,7 @@
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true,
-    "useUnknownInCatchVariables": false,
+    "useUnknownInCatchVariables": false
   },
 
   "references": [
