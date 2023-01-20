@@ -10,7 +10,7 @@ export default () => {
   return defineConfig({
     plugins: [
       vue(),
-      babel({
+      env.NODE_ENV !== 'production' && babel({
         babelConfig: {
           babelrc: false,
           configFile: false,
@@ -44,18 +44,6 @@ export default () => {
             @import "@/assets/scss/variables.scss";
           `,
         }
-      }
-    },
-    build: {
-      target: 'esnext',
-      sourcemap: true,
-      commonjsOptions: {
-        sourceMap: true,
-      },
-      rollupOptions: {
-        external: [
-          'lodash',
-        ]
       }
     }
   })
