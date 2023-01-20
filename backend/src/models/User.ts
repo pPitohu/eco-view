@@ -3,26 +3,26 @@ import { UserRoles } from '../constants/userRoles'
 
 const UserSchema = new mongoose.Schema({
   email: {
-    required: true,
     type: String,
+    required: true,
     unique: true
   },
   password: {
-    required: true,
-    type: String
-  },
-  role: {
-    default: UserRoles.USER,
-    type: String
+    type: String,
+    required: true
   },
   username: {
-    required: true,
     type: String,
+    required: true,
     unique: true
+  },
+  role: {
+    type: String,
+    default: UserRoles.USER
   }
 }, {
-  collection: 'users',
-  timestamps: true
+  timestamps: true,
+  collection: 'users'
 })
 
 export default mongoose.model('User', UserSchema)
