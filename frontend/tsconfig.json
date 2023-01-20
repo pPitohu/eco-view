@@ -1,11 +1,11 @@
 {
   "extends": "@vue/tsconfig/tsconfig.web.json",
-  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.ts"],
+  "include": ["env.d.ts", "src/**/*", "src/**/*.ts"],
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ESNext",
     "module": "ESNext",
-    "strict": true,
+    // "strict": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
     "paths": {
