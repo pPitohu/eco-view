@@ -5,9 +5,9 @@
   "author": "pPitohu (Gleb)",
   "license": "ISC",
   "scripts": {
-    "dev": "ts-node-dev ./src/index.ts",
+    "dev": "ts-node-dev ./src/server.ts",
     "build": "tsc",
-    "start": "node dist/index",
+    "start": "node dist/server",
     "lint": "eslint . --fix",
     "prepare": "cd .. && husky install"
   },
