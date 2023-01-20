@@ -1,8 +1,8 @@
 import vue from '@vitejs/plugin-vue'
 
-import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import babel from 'vite-plugin-babel'
+import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default () => {
