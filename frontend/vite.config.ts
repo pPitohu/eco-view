@@ -55,7 +55,6 @@ export default () => {
       rollupOptions: {
         external: [
           'lodash',
-          /node_modules/,
         ]
       }
     }
