@@ -10,7 +10,7 @@ export default () => {
   return defineConfig({
     plugins: [
       vue(),
-      env.NODE_ENV !== 'production' && babel({
+      env.VITE_NODE_ENV !== 'production' && babel({
         babelConfig: {
           babelrc: false,
           configFile: false,
