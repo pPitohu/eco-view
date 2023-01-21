@@ -14,8 +14,8 @@ app.use(bodyParser.json())
 app.use(cookieParser())
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
-  res.header('Access-Control-Allow-Origin', '*')
-  // res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL)
+  // res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL)
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE')
   res.header(
     'Access-Control-Allow-Headers',
