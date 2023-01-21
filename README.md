@@ -8,4 +8,4 @@ Here is used:
  - **Mongo** as db with **Mongoose ODM**
  - **Docker** to make everything centralized in one container and easy to use
 
-Deployed to kamatera
+Deployed to render ( https://eco-view-client-1xzy.onrender.com/ )
