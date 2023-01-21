@@ -30,7 +30,7 @@ app.use(router)
 
 mongoose.connect(
   process.env.MONGO_URL,
-  process.env.NODE_ENV !== 'production' ? {
+  process.env.NODE_ENV === 'development' ? {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } : {}
