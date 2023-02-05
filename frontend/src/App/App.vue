@@ -17,6 +17,7 @@
         class="logo"
         src="@/assets/images/logo.svg"
         alt="logo"
+        @click="$router.push({ name: '/' })"
       >
       <Transition name="fade-in-bottom">
         <Header />
