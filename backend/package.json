@@ -11,6 +11,9 @@
     "lint": "eslint . --fix",
     "prepare": "cd .. && husky install"
   },
+  "engines": {
+    "node": ">=16 <18"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
