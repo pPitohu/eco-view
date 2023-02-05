@@ -1,3 +1,4 @@
+import { useUserStore } from '.'
 import { UserService } from '@/services/UserService'
 import type { UserData, UserLoginData } from '@/services/UserService/types'
 import { handleResponse } from '@/utils/axios/handleResponse'
@@ -35,6 +36,9 @@ const actions = {
     return { error: response.status !== 200 }
   },
   getCurrentUser: async () => {
+    const userStore = useUserStore()
+    userStore.isProfileLoading = true
+
     const response = await UserService.getCurrentUser()
     
     const handleSuccessStatus = ({ token }: { token: string }) => {
@@ -46,7 +50,9 @@ const actions = {
       response,
       successStatus: 200
     })
-  }
+
+    userStore.isProfileLoading = false
+  },
 }
 
 export default actions

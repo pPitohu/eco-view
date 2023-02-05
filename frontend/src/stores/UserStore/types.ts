@@ -10,4 +10,5 @@ export type UserState = {
   createdAt: string | null,
   updatedAt: string | null,
   role: UserRoles | null
+  image: string
 }

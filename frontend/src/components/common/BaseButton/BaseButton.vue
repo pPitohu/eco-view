@@ -2,7 +2,8 @@
   <div
     class="button-wrapper"
     :class="{
-      'large': large
+      'large': large,
+      [variant]: true
     }"
   >
     <button
@@ -44,6 +45,11 @@ export default {
       required: false,
       default: false,
     },
+    variant: {
+      type: String,
+      required: false,
+      default: 'primary'
+    }
   }
 }
 </script>

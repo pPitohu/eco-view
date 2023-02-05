@@ -14,9 +14,9 @@
   max-width: 640px;
   border-radius: 30px;
   padding: 40px 60px;
-  background: rgba(66, 106, 140, 0.55);
+  background: $darken-blue;
   backdrop-filter: blur(10px);
-  filter: drop-shadow(0px 4px 12px #48D9A4);
+  filter: drop-shadow(0px 4px 12px $lightGreen);
   z-index: inherit;
   animation: bouncyFadeInBottom .8s ease-in-out forwards;
   .heading {

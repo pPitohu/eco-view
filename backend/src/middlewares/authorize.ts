@@ -15,12 +15,12 @@ export const authorize = (roles: UserRoles[]) =>
         return res.status(StatusCodes.Unauthorized).send(ResponseTexts.PleaseAuthorize)
       }
     
-      const decrypt = verify(token, process.env.JWT_SECRET)
+      const decrypt: any = verify(token, process.env.JWT_SECRET)
       const user = await User.findById(decrypt._id)
       req.body.user = user
 
-      if (user.role === UserRoles.ADMIN) return next()
-      if (!roles.includes(user.role)) {
+      if (user?.role === UserRoles.ADMIN) return next()
+      if (!roles.includes(user?.role)) {
         return res.status(StatusCodes.Unauthorized).send(ResponseTexts.PleaseAuthorize)
       }
     

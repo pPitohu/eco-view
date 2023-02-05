@@ -1,0 +1,66 @@
+.modal {
+  position: fixed;
+  z-index: 100;
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.24);
+    z-index: 100;
+  }
+
+  &__content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    max-width: 900px;
+    background: rgba(255,255,255,0);
+    border-radius: 12px;
+    z-index: 101;
+  }
+
+  &__close {
+    position: absolute;
+    top: -24px;
+    right: -64px;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: $default-transition;
+    user-select: none;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    &:active {
+      transform: translate(0, 2px);
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    img {
+      user-select: none;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__body {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity $default-transition;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}

@@ -20,6 +20,7 @@
 
 <script lang="ts">
 import LogoFilled from '@/components/icons/LogoFilled.vue'
+
 export default {
   components: {
     LogoFilled,
@@ -30,7 +31,7 @@ export default {
       required: false,
       default: true,
     }
-  }
+  },
 }
 </script>
 

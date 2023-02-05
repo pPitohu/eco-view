@@ -10,7 +10,7 @@ export const ToastOptions: ToastPluginOptions = {
 }
 
 export const fireToast = (
-  type: TYPE = TYPE.INFO,
+  type: TYPE,
   text: string,
   options?: ToastPluginOptions
 ) => {

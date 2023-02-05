@@ -2,7 +2,7 @@
   <div class="authorization-wrapper">
     <LogoStroke
       class="logo"
-      @click="() => $router.push({ name: 'home' })"
+      @click="() => $router.push('/')"
     />
     <TopLeftLeafs />
 

@@ -1,0 +1,65 @@
+.profile-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  .profile {
+    &-image {
+      max-width: 48px;
+      max-height: 48px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      outline: 2px solid rgba(255,255,255,0);
+      transition: $default-transition;
+      cursor: pointer;
+      &.active {
+        inset: 1px;
+        outline: 2px solid white;
+      }
+    }
+    &-dropdown {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 170px;
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border-radius: 12px;
+      padding: 10px 0;
+      .item {
+        padding: 10px 15px;
+        cursor: pointer;
+        color: rgba(0,0,0,.5);
+        transition: $default-transition;
+        &.logout {
+          color: $danger-color;
+          &:hover {
+            background: rgba(217, 65, 105, 0.15);
+          }
+        }
+        &:before {
+          display: none;
+        }
+        &:hover {
+          background: rgba(0,0,0,.05);
+        }
+      }
+    }
+  }
+  .caret {
+    width: 34px;
+    height: 34px;
+    padding: 5px 5px 3px 5px;
+    cursor: pointer;
+    transition: $default-transition;
+    border-radius: 50%;
+    user-select: none;
+    -webkit-user-select: none;
+    &:hover, &.active {
+      background: rgba(0,0,0,.08);
+    }
+  }
+}

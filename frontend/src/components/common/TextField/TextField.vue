@@ -9,7 +9,10 @@
     <label v-if="label">{{ label }}</label>
     <div
       class="text-field__input-wrapper"
-      :class="{ 'error': errorMessage }"
+      :class="{
+        'error': errorMessage,
+        'with-border': withBorder,
+      }"
     >
       <div class="prepend-icon">
         <slot
@@ -60,6 +63,11 @@ export default {
     PasswordEye,
   },
   props: {
+    withBorder: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
     large: {
       type: Boolean,
       required: false,

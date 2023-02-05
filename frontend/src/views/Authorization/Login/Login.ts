@@ -8,7 +8,7 @@ const useLogin = () => {
   const login = async values => {
     const { email, password } = values
     const { error } = await userStore.login({ email, password })
-    if (!error) router.push({ name: 'home' })
+    if (!error) router.push({ name: 'profile' }) // change to '/'
   }
 
   return {

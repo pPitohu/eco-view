@@ -13,7 +13,6 @@
     z-index: inherit;
   }
   &.hidden {
-    z-index: -1;
     .left-gradient, .left-gradient2, .left-gradient3 {
       animation: slideLeft .8s ease-in-out forwards, fadeOut 1.2s ease-in-out forwards;
     }

@@ -9,12 +9,13 @@ enum ResponseTexts {
   UnknownError = 'Неизвестная ошибка',
   UserNotFound = 'Пользователь не найден',
   PasswordIsInvalid = 'Неверный пароль',
+  InvalidData = 'Неверные данные'
 }
 
 const generateLifeTime = (days: number) => {
   const hoursInDay = 24
-  const milisecondsInHour = 3600000
-  return milisecondsInHour * hoursInDay * days
+  const millisecondsInHour = 3600000
+  return millisecondsInHour * hoursInDay * days
 }
 
 const createToken = (payload: object) => {
@@ -30,8 +31,10 @@ export class UserService {
     email: string;
     password: string;
     username: string;
-   }) => {
-    const isUserEmailExists = await User.findOne({ email })
+  }) => {
+    if (!email || !password || !username)
+      throw ApiError.BadRequest(ResponseTexts.InvalidData)
+    const isUserEmailExists = await User.findOne({ email: email.toLowerCase() })
     if (isUserEmailExists)
       throw ApiError.BadRequest(ResponseTexts.UserEmailAlreadyExists)
     
@@ -42,7 +45,11 @@ export class UserService {
     const passwordSalt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password, passwordSalt)
 
-    const user = await User.create({ email, password: hashedPassword, username })
+    const user = await User.create({
+      email: email.toLowerCase(),
+      password: hashedPassword,
+      username
+    })
 
     const token = createToken(user.toJSON())
 
@@ -53,7 +60,9 @@ export class UserService {
     email: string;
     password: string;
   }) => {
-    const user = await User.findOne({ email })
+    if (!email || !password)
+      throw ApiError.BadRequest(ResponseTexts.InvalidData)
+    const user = await User.findOne({ email: email.toLowerCase() })
     if (!user)
       throw ApiError.BadRequest(ResponseTexts.UserNotFound)
       

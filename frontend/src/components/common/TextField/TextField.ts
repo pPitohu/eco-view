@@ -1,7 +1,7 @@
 import { useField } from 'vee-validate'
 import { ref } from 'vue'
 
-const useTextField = (props: any) => {
+const useTextField = props => {
   const inputType = ref(props.type)
   const isPasswordInput = props.type === 'password'
   const isPasswordVisible = ref(false)

@@ -2,13 +2,18 @@ import type { RouteRecordRaw } from 'vue-router'
 import Authorization from '@/views/Authorization/Authorization.vue'
 import Login from '@/views/Authorization/Login/Login.vue'
 import Register from '@/views/Authorization/Register/Register.vue'
-import Home from '@/views/Home/Home.vue'
+import Map from '@/views/Map/Map.vue'
+import Profile from '@/views/Profile/Profile.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'home',
-    component: Home,
+    redirect: { name: 'map' }
+  },
+  {
+    path: '/map',
+    name: 'map',
+    component: Map
   },
   {
     path: '/auth',
@@ -33,6 +38,14 @@ const routes: RouteRecordRaw[] = [
         component: () => { }
       }
     ]
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile,
+    meta: {
+      isPrivateRoute: true
+    }
   }
 ]
 

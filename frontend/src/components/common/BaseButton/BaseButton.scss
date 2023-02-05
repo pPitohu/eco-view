@@ -1,7 +1,7 @@
 .button-wrapper {
   .button {
+    width: 100%;
     border-radius: 8px;
-    background: $base-gradient;
     border: none;
     outline: none;
     cursor: pointer;
@@ -23,7 +23,7 @@
       transform: translateY(0);
       filter: brightness(0.95);
     }
-    
+
     &-text {
       display: inline-block;
       font-size: 18px;
@@ -43,7 +43,7 @@
       height: 100%;
       max-width: 24px;
       max-height: 24px;
-      &::v-deep > * {
+      &:deep(*) {
         max-width: 24px;
         max-height: 24px;
         width: 100%;
@@ -70,6 +70,22 @@
     }
   }
 
+  &.primary .button {
+    background: $base-gradient;
+  }
+
+  &.secondary .button {
+    background: white;
+
+    &-text {
+      color: $primaryColor;
+    }
+  }
+
+  &.danger .button {
+    background: $danger-color;
+  }
+
   &.large .button {
     border-radius: 10px;
     padding: 15px 45px;
@@ -82,7 +98,7 @@
     .append-icon {
       max-width: 32px;
       max-height: 32px;
-      &::v-deep > * {
+      &:deep(*) {
         max-width: 32px;
         max-height: 32px;
         width: 100%;

@@ -1,0 +1,26 @@
+.yandex-container {
+  width: calc(100% - $map-filters-width);
+  height: 100%;
+}
+
+:deep(.yandex-balloon) {
+  min-height: 200px;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  max-width: calc(100% - 266px);
+  margin-right: 35px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 4px -6px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  .map-filters {
+    max-width: $map-filters-width;
+    width: 100%;
+    background: $lightGreen;
+    box-shadow: 4px 0px 25px rgba(0, 0, 0, 0.15);
+    z-index: 2;
+  }
+}

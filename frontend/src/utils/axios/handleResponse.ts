@@ -20,7 +20,7 @@ export const handleResponse = ({
     return handleSuccessStatus
         && handleSuccessStatus(data)
   case 401:
-    router.push({ name: 'login' })
+    // router.push({ name: 'login' })
     break
   case 404:
     router.replace({ name: 'not-found' })

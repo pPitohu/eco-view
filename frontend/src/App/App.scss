@@ -1,3 +1,31 @@
+main:not(.auth-page) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: inherit;
+  .navigation {
+    z-index: 3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 35px;
+    .logo {
+      margin-top: 35px;
+      margin-left: 30px;
+    }
+  }
+
+  &.map-page {
+    padding-top: 170px;
+    .navigation {
+      z-index: 3;
+    }
+  }
+}
+  
 .fade-in-bottom {
   &-enter-active,
   &-leave-active {

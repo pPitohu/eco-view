@@ -1,15 +1,9 @@
-import { ref } from 'vue'
 import { registerFormValidator } from '@/components/common/TextField/TextFieldRules'
 import router from '@/router'
 import { useUserStore } from '@/stores/UserStore'
 
 const useRegister = () => {
   const userStore = useUserStore()
-
-  const email = ref('')
-  const username = ref('')
-  const password = ref('')
-  const confirmPassword = ref('')
 
   const register = async values => {
     const { email, password, username } = values
@@ -18,14 +12,10 @@ const useRegister = () => {
       username: username,
       password: password,
     })
-    if (!error) router.push({ name: 'home' })
+    if (!error) router.push({ name: 'profile' }) // change to '/'
   }
 
   return {
-    email,
-    username,
-    password,
-    confirmPassword,
     register,
     registerFormValidator
   }
