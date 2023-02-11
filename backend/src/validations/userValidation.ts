@@ -31,3 +31,8 @@ export const registerSchema = yup.object({
   username: userNameRules,
 })
 
+export const updateSchema = yup.object({
+  email: emailRules.notRequired(),
+  password: passwordRules.notRequired(),
+  username: userNameRules.notRequired(),
+})

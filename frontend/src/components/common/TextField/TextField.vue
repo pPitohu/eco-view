@@ -26,6 +26,7 @@
         :type="inputType"
         :rules="rules"
         :placeholder="placeholder"
+        v-bind="$attrs"
         @input="$emit('input', $event)"
       />
       <div

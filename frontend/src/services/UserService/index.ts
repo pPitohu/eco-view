@@ -25,5 +25,31 @@ export const UserService = {
     } catch (error) {
       return error.response
     }
+  },
+  updateImage: async (image: File) => {
+    try {
+      const formData = new FormData()
+      formData.append('image', image)
+      const response = await instance.put('/user/image', formData, {
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      })
+      return response
+    } catch (error) {
+      return error.response
+    }
+  },
+  updateCredentials: async (userData: {
+    username?: string,
+    email?: string,
+    password?: string
+  }) => {
+    try {
+      const response = await instance.put('/user/credentials', userData)
+      return response
+    } catch (error) {
+      return error.response
+    }
   }
 }

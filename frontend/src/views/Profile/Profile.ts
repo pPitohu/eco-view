@@ -10,11 +10,13 @@ import { useUserStore } from '@/stores/UserStore'
 const useProfile = () => {
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
-  const { changePassword, logout } = userStore
+  const { logout } = userStore
 
   const isEditingUsername = ref(false)
   const isEditingEmail = ref(false)
   const isPasswordModalOpen = ref(false)
+
+  const imageInput = ref()
   
   const toggleEditingUsername = () => {
     isEditingUsername.value = !isEditingUsername.value
@@ -27,14 +29,32 @@ const useProfile = () => {
   const togglePasswordModal = () =>
     isPasswordModalOpen.value = !isPasswordModalOpen.value
   
-  const saveUsername = e => {
-    user.value.username = e.username
+  const saveUsername = async e => {
+    if (e.username !== user.value.username)
+      await userStore.updateCredentials({ username: e.username })
     toggleEditingUsername()
   }
 
-  const saveEmail = e => {
-    user.value.email = e.email
+  const saveEmail = async e => {
+    if (e.email !== user.value.email)
+      await userStore.updateCredentials({ email: e.email })
     toggleEditingEmail()
+  }
+
+  const changePassword = async e => {
+    await userStore.updateCredentials({ password: e.password })
+    togglePasswordModal()
+  }
+
+  const selectImage = () => {
+    if (imageInput.value)
+      imageInput.value.click()
+  }
+
+  const updateImage = async (e: Event) => {
+    const file = (e?.target as HTMLInputElement)?.files?.[0]
+    if (file)
+      await userStore.updateImage(file)
   }
 
   return {
@@ -51,7 +71,10 @@ const useProfile = () => {
     emailFormValidator,
     userNameFormValidator,
     saveUsername,
-    saveEmail
+    saveEmail,
+    selectImage,
+    imageInput,
+    updateImage
   }
 }
 

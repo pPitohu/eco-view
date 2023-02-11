@@ -2,6 +2,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import * as dotenv from 'dotenv'
 import express, { Application, NextFunction, Request, Response, Router } from 'express'
+import fileUpload from 'express-fileupload'
 import mongoose from 'mongoose'
 import UserRouter from './routes/user'
 dotenv.config()
@@ -12,6 +13,10 @@ const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.json())
 app.use(cookieParser())
+app.use(fileUpload({
+  debug: true,
+  limits: { fileSize: 50 * 1024 * 1024 }
+}))
 
 app.use((req: Request, res: Response, next: NextFunction): void => {
   res.header('Access-Control-Allow-Origin', process.env.CLIENT_URL)

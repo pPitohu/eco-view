@@ -10,5 +10,8 @@ export type UserState = {
   createdAt: string | null,
   updatedAt: string | null,
   role: UserRoles | null
-  image: string
+  image: {
+    imageLink: string,
+    fileId: string | null
+  }
 }

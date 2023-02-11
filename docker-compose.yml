@@ -5,6 +5,8 @@ services:
     image: pitohu/eco-view:eco-view-server
     build: 
       context: ./backend
+    env_file:
+      - ./backend/.env
     ports:
       - 3000:3000
     volumes:

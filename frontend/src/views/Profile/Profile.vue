@@ -3,13 +3,25 @@
     <div class="profile-card">
       <div class="profile-card__image">
         <img
-          :src="user.image"
+          class="avatar"
+          :src="user.image.imageLink"
           alt="avatar"
         >
-        <div class="profile-card__image-edit">
+        <div
+          class="profile-card__image-edit"
+          @click="selectImage"
+        >
           <img
             src="@/assets/icons/pencil-white.svg"
             alt="pencil-white"
+          >
+          <input
+            ref="imageInput"
+            class="image-input"
+            type="file"
+            accept="image/*"
+            @change.stop="updateImage"
+            @click.stop
           >
         </div>
       </div>
@@ -36,6 +48,7 @@
                 placeholder="Логин"
                 type="text"
                 :value="user.username || ''"
+                autofocus
               />
               <BaseButton
                 :disabled="!meta.valid"
@@ -80,6 +93,7 @@
                 placeholder="Email"
                 type="email"
                 :value="user.email || ''"
+                autofocus
               />
               <BaseButton
                 :disabled="!meta.valid"
@@ -116,7 +130,7 @@
                 v-slot="{ meta }"
                 class="edit-form"
                 :validation-schema="newPasswordFormValidator"
-                @submit="changePassword(); togglePasswordModal()"
+                @submit="changePassword"
               >
                 <p class="edit-form__title">
                   Смена пароля
@@ -126,6 +140,7 @@
                   name="password"
                   type="password"
                   placeholder="Новый пароль"
+                  autofocus
                 />
                 <TextField
                   with-border

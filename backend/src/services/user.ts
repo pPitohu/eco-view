@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { ApiError } from '../helpers/apiError'
+import { imagekit } from '../helpers/imagekit'
 import User from '../models/User'
 
 enum ResponseTexts {
@@ -26,6 +27,12 @@ const createToken = (payload: object) => {
   )
 }
 
+const hashPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt(10)
+  const hashedPassword = await bcrypt.hash(password, salt)
+  return hashedPassword
+}
+
 export class UserService {
   public static register = async ({ email, password, username }: {
     email: string;
@@ -42,8 +49,7 @@ export class UserService {
     if (isUserUsernameExists)
       throw ApiError.BadRequest(ResponseTexts.UserUsernameAlreadyExists)
       
-    const passwordSalt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, passwordSalt)
+    const hashedPassword = await hashPassword(password)
 
     const user = await User.create({
       email: email.toLowerCase(),
@@ -76,6 +82,52 @@ export class UserService {
   }
 
   public static getMe = async (user: any) => {
+    const token = createToken(user.toJSON())
+    return { token }
+  }
+
+  public static updateImage = async (user, image) => {
+    try {
+      if (user.image.fileId)
+        await imagekit.deleteFile(user.image.fileId)
+    } catch { /* empty */ }
+
+    const imageType = image.mimetype.split('/')[1]
+
+    const { fileId, url } = await imagekit.upload({
+      file: image.data,
+      fileName: `${user._id}.${imageType}`,
+      folder: 'users'
+    })
+
+    user.image = { fileId, imageLink: url },
+    await user.save()
+    
+    return user.image
+  }
+
+  public static updateCredentials = async body => {
+    const { email, password, user, username } = body
+
+    if (username) {
+      const isUserUsernameExists = await User.findOne({ username })
+      if (isUserUsernameExists)
+        throw ApiError.BadRequest(ResponseTexts.UserUsernameAlreadyExists)
+      user.username = username
+    }
+
+    if (email) {
+      const isUserEmailExists = await User.findOne({ email: email.toLowerCase() })
+      if (isUserEmailExists)
+        throw ApiError.BadRequest(ResponseTexts.UserEmailAlreadyExists)
+      user.email = email.toLowerCase()
+    }
+    
+    if (password)
+      user.password = await hashPassword(password)
+    
+    await user.save()
+
     const token = createToken(user.toJSON())
     return { token }
   }

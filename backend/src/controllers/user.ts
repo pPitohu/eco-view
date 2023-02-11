@@ -30,4 +30,22 @@ export class UserController {
       handleError(res, e)
     }
   }
+
+  public static updateImage = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const imageData = await UserService.updateImage(req.body.user, (req as any).files.image)
+      return res.status(StatusCodes.Ok).json(imageData)
+    } catch (e) {
+      handleError(res, e)
+    }
+  }
+
+  public static updateCredentials = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const token = await UserService.updateCredentials(req.body)
+      return res.status(StatusCodes.Ok).json(token)
+    } catch (e) {
+      handleError(res, e)
+    }
+  }
 }

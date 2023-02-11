@@ -1,4 +1,6 @@
 import { useUserStore } from '.'
+import { TYPE } from 'vue-toastification'
+import { fireToast } from '@/plugins/toast'
 import { UserService } from '@/services/UserService'
 import type { UserData, UserLoginData } from '@/services/UserService/types'
 import { handleResponse } from '@/utils/axios/handleResponse'
@@ -53,6 +55,41 @@ const actions = {
 
     userStore.isProfileLoading = false
   },
+
+  updateImage: async (image: File) => {
+    const userStore = useUserStore()
+    const response = await UserService.updateImage(image)
+    
+    const handleSuccessStatus = ({ imageLink }: { imageLink: string }) => {
+      userStore.user.image.imageLink = imageLink
+      fireToast(TYPE.SUCCESS, 'Аватар успешно изменен!')
+    }
+
+    handleResponse({
+      handleSuccessStatus,
+      response,
+      successStatus: 200
+    })
+  },
+
+  updateCredentials: async (userData: {
+    username?: string,
+    email?: string,
+    password?: string
+  }) => {
+    const response = await UserService.updateCredentials(userData)
+    
+    const handleSuccessStatus = ({ token }: { token: string }) => {
+      setUserByToken(token)
+      fireToast(TYPE.SUCCESS, 'Данные успешно изменены!')
+    }
+
+    handleResponse({
+      handleSuccessStatus,
+      response,
+      successStatus: 200
+    })
+  }
 }
 
 export default actions

@@ -23,7 +23,10 @@ export const setUserByToken = (token: string) => {
     updatedAt,
     image
   }
-  userStore.user.image = image || accountPlugImage
+  userStore.user.image = image.imageLink ? image : {
+    imageLink: accountPlugImage,
+    fileId: null
+  }
 
   localStorage.setItem('token', token)
 }

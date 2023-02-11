@@ -21,8 +21,12 @@ const UserSchema = new mongoose.Schema({
     default: UserRoles.USER
   },
   image: {
-    type: String,
-    required: false
+    type: Object,
+    required: false,
+    default: {
+      imageLink: null,
+      fileId: null
+    }
   }
 }, {
   timestamps: true,

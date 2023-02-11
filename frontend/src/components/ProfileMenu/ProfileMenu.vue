@@ -6,7 +6,7 @@
     <img
       class="profile-image"
       :class="{'active': isMenuOpen}"
-      :src="user.image"
+      :src="user.image.imageLink"
       alt="profile-image"
       @click="toggleMenu"
     >

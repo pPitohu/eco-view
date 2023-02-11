@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
-import { TYPE } from 'vue-toastification'
 import accountPlugImage from '@/assets/images/account-plug.svg'
-import { fireToast } from '@/plugins/toast'
 import router from '@/router'
 import actions from './actions'
 import type { UserState } from './types'
@@ -15,7 +13,10 @@ const userStore = () => {
     createdAt: null,
     updatedAt: null,
     role: null,
-    image: accountPlugImage
+    image: {
+      imageLink: accountPlugImage,
+      fileId: null
+    }
   })
 
   const isProfileLoading = ref(true)
@@ -29,7 +30,10 @@ const userStore = () => {
       createdAt: null,
       updatedAt: null,
       role: null,
-      image: accountPlugImage
+      image: {
+        imageLink: accountPlugImage,
+        fileId: null
+      }
     }
   }
 
@@ -40,17 +44,12 @@ const userStore = () => {
       router.push({ name: 'login' }) // change to '/'
   }
 
-  const changePassword = () => {
-    fireToast(TYPE.SUCCESS, 'Пароль успешно изменен!')
-  }
-
   return {
     user,
     isAuthorized,
     isProfileLoading,
     resetUserState,
     logout,
-    changePassword,
     ...actions
   }
 }
