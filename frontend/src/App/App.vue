@@ -47,11 +47,9 @@ onMounted(async () => {
   if (!userStore.isAuthorized)
     await userStore.getCurrentUser()
 
-  document.onreadystatechange = () => {
-    if (document.readyState === 'complete')
-      setTimeout(disablePageHidden, 1000)
+  window.onload = () => {
+    setTimeout(disablePageHidden, 1000)
   }
-  // disablePageHidden()
 })
 </script>
 

@@ -12,7 +12,6 @@ const useMap = () => {
   const setMapHeight = (mapContainer: Map['container']) => {
     MapContainer.value.style.height = `${window.innerHeight - 170}px`
     mapContainer.fitToViewport()
-    MapContainer.value.style.height = '100%'
   }
 
   const created = async (map: Map) => {
