@@ -10,32 +10,43 @@
       @created="created"
     >
       <YandexClusterer>
-        <YandexMarker
-          :coordinates="[53.943997, 27.712215]"
-          marker-id="123"
+        <MapMarker
+          v-for="marker in markersToDisplay"
+          :key="marker.id"
+          :marker-id="marker.id"
+          :coordinates="marker.coords"
           :options="{
             balloonPanelMaxMapArea: 0,
-            preset: 'islands#blueStretchyIcon',
-            balloonOffset: [0, -40],
+            balloonOffset: [0, -15],
+            iconLayout: 'default#image',
+            iconImageHref: marker.icon,
           }"
           @click="handleMarkerClick"
         >
-          <template #component>
-            <div style="padding: 40px;">
+          <template #balloon>
+            <div>
               {{ clickData }}
             </div>
           </template>
-        </YandexMarker>
+        </MapMarker>
       </YandexClusterer>
     </YandexMap>
-    <div class="map-filters" />
+    <div class="map-sidebar">
+      <MapFilters />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import useMap from './Map'
+import MapFilters from './MapFilters/MapFilters.vue'
+import MapMarker from './MapMarker/MapMarker.vue'
 
 export default {
+  components: {
+    MapFilters,
+    MapMarker
+  },
   setup() {
     return useMap()
   }

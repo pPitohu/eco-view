@@ -1,0 +1,45 @@
+.map-filters {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  .filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+    &.active {
+      .filter-image {
+        box-shadow: 0 0 2px 2px white;
+        img {
+          filter: invert(1);
+        }
+      }
+    }
+    &-image {
+      width: 70px;
+      height: 70px;
+      border-radius: 100px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transition: background $default-transition;
+      & > img {
+        user-select: none;
+        pointer-events: none;
+      }
+    }
+    &-name {
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      user-select: none;
+    }
+  }
+}
