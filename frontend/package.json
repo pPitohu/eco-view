@@ -12,9 +12,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "prepare": "cd .. && husky install"
   },
-  "engines": {
-    "node": ">=16 <18"
-  },
   "dependencies": {
     "@formkit/auto-animate": "^1.0.0-beta.5",
     "axios": "^1.2.0",
