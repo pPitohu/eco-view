@@ -1,3 +1,4 @@
 *.pem
 *.txt
 frontend/.env
+*/package-lock.json
