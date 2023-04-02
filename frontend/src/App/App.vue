@@ -43,11 +43,11 @@ const disablePageHidden = () => {
     isShowLoader.value = false
   }, 1400)
 }
-onMounted(async () => {
-  if (!userStore.isAuthorized)
-    await userStore.getCurrentUser()
+onMounted(() => {
+  window.onload = async () => {
+    if (!userStore.isAuthorized)
+      await userStore.getCurrentUser()
 
-  window.onload = () => {
     setTimeout(disablePageHidden, 1000)
   }
 })
