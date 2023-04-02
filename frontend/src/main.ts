@@ -29,7 +29,7 @@ app.use(pinia)
 app.use(router)
 app.use(Toast, ToastOptions)
 app.use(autoAnimatePlugin)
-app.use(VWave)
+app.use(VWave, {})
 app.use(YmapPlugin, YmapSettings)
 app.use(vClickOutside)
 
