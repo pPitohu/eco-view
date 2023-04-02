@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav class="links">
-      <router-link to="/">
+      <router-link to="/map">
         Главная
       </router-link>
       <router-link to="/">
