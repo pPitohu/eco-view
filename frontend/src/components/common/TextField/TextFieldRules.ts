@@ -46,3 +46,11 @@ export const userNameFormValidator = yup.object({
 export const emailFormValidator = yup.object({
   email: emailRules,
 })
+
+export const markerCreationFormValidator = yup.object({
+  markerName: yup
+    .string().trim('Нельзя использовать пробелы')
+    .required('Обязательное поле')
+    .min(5, 'Минимум 5 символов')
+    .nullable(),
+})

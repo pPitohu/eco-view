@@ -8,10 +8,7 @@
         Сортируй правильно!
       </router-link>
       <router-link to="/">
-        О нас
-      </router-link>
-      <router-link to="/">
-        Поддержать проект
+        Руководство пользователя
       </router-link>
     </nav>
     <div

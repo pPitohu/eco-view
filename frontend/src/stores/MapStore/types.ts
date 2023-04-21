@@ -33,11 +33,16 @@ export enum FilterValues {
 }
 
 export interface Marker {
-  id: string,
+  _id: string,
   name: string,
   coords: [number, number],
   garbageType: string[],
-  icon: string
+  icon: string,
+  approvalStatus: string,
+  author: string,
+  isVisible: boolean,
+  createdAt: string,
+  updatedAt: string
 }
 
 export const MarkerIcons = {
@@ -46,5 +51,5 @@ export const MarkerIcons = {
   [FilterValues.metal]: redMarkerIcon,
   [FilterValues.plastic]: orangeMarkerIcon,
   [FilterValues.clothes]: pinkMarkerIcon,
-  [FilterValues.all]: grayMarkerIcon
+  'gray': grayMarkerIcon,
 }

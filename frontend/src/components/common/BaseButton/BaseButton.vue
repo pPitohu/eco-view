@@ -2,6 +2,8 @@
   <div
     class="button-wrapper"
     :class="{
+      'icon': icon,
+      'circle': circle,
       'large': large,
       [variant]: true
     }"
@@ -49,6 +51,16 @@ export default {
       type: String,
       required: false,
       default: 'primary'
+    },
+    circle: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    icon: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 }

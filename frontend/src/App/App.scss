@@ -3,12 +3,16 @@ main:not(.auth-page) {
   justify-content: flex-end;
   align-items: flex-end;
   min-height: inherit;
+  max-width: 1640px;
+  margin: 0 auto;
   .navigation {
     z-index: 3;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
+    max-width: 1640px;
     display: flex;
     justify-content: space-between;
     gap: 35px;

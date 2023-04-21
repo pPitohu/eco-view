@@ -17,7 +17,7 @@ export const YmapSettings = {
   lang: 'ru_RU',
   coordorder: 'latlong',
   version: '2.1',
-  debug: true
+  debug: false
 }
 
 const pinia = createPinia()

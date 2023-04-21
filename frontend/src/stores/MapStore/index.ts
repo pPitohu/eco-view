@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import fourSquares from '@/assets/icons/four-squares.svg'
 import glassBottle from '@/assets/icons/glass-bottle.svg'
 import metallicBottle from '@/assets/icons/metallic-bottle.svg'
@@ -15,7 +15,7 @@ const mapStore = () => {
       name: 'Все',
       value: FilterValues.all,
       icon: fourSquares,
-      isActive: true,
+      isActive: false,
       activeColor: FilterColors.all,
       action: () => disableFiltersExcept(FilterValues.all)
     },
@@ -57,6 +57,7 @@ const mapStore = () => {
   ])
 
   const activeFilters = computed(() => filters.value.filter(({ isActive }) => isActive))
+  const activeFiltersValues = computed(() => activeFilters.value.map(filter => filter.value))
 
   const findFilterByValue = (filterValue: Filter['value']) => {
     return filters.value.find(({ value }) => value === filterValue)
@@ -90,29 +91,60 @@ const mapStore = () => {
       filter.isActive = false
   }
 
-  // ================================
-
   const markers = ref<Marker | any>([])
+  const markersToDisplay = ref([])
 
-  const setMarkersImage = () => {
-    markers.value.map((marker: Marker) => {
-      const markerIcon = MarkerIcons[marker.garbageType[
-        Math.floor(Math.random() * marker.garbageType.length)
-      ]]
+  const modifyMarker = (marker: Marker) => {
+    const setMarkerIcon = (marker: Marker) => {
+      const markerIcon = marker.approvalStatus === 'approved'
+        ? MarkerIcons[marker.garbageType[0]]
+        : MarkerIcons['gray']
+      const markerWithIcon = { ...marker, icon: markerIcon }
+      return markerWithIcon
+    }
+    
+    const markerWithIcon = setMarkerIcon(marker)
 
-      marker.icon = markerIcon || MarkerIcons[FilterValues.all]
-    })
+    return markerWithIcon
   }
+
+  const modifyMarkers = () => {
+    markers.value = markers.value.map(modifyMarker)
+  }
+
+  const isMarkerVisible = (marker: Marker) => {
+    const isVisible = marker.garbageType.some(type =>
+      activeFiltersValues.value.includes(type))
+    return isVisible
+  }
+  // watch([ markers, activeFilters ], () => {
+  //   if (findFilterByValue(FilterValues.all)?.isActive)
+  //     markersToDisplay.value = markers.value
+  //   else markersToDisplay.value = markers.value.filter(isMarkerVisible)
+  // })
+
+  watch([activeFilters], () => {
+    if (findFilterByValue(FilterValues.all)?.isActive)
+      markers.value = markers.value.map(marker => ({ ...marker, isVisible: true }))
+    else markers.value = markers.value.map(marker => ({
+      ...marker, isVisible: isMarkerVisible(marker)
+    }))
+    console.log(markers.value)
+  })
 
   return {
     markers,
+    markersToDisplay,
     filters,
     activeFilters,
+    activeFiltersValues,
     toggleFilterActive,
     setFilterActive,
     setFilterInactive,
-    setMarkersImage,
     findFilterByValue,
+    isMarkerVisible,
+    modifyMarker,
+    modifyMarkers,
     ...actions
   }
 }
