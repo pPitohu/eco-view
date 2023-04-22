@@ -5,6 +5,7 @@ import defaultMarkerIcon from '@/assets/icons/default-marker-icon.svg'
 import { YmapSettings } from '@/main'
 import { useMapStore } from '@/stores/MapStore'
 import type { Marker } from '@/stores/MapStore/types'
+import { attachMarkerToMouseMove, detachMarkerFromMouseMove } from '@/utils/floatingMarkerMouseMove'
 import type { Map } from 'yandex-maps'
 
 const MinskCoordinates = [ 53.902287, 27.561824 ]
@@ -30,7 +31,6 @@ const useMap = () => {
     await loadYmap(YmapSettings)
     await loadMarkers()
 
-    console.log('created')
     setMapHeight(map.container)
     window.onresize = () => setMapHeight(map.container)
   }
@@ -49,8 +49,8 @@ const useMap = () => {
   }
 
   const disableEditingMode = () => {
-    isEditingMode.value = false
     newMarkerCoords.value = []
+    isEditingMode.value = false
   }
   
   onMounted(async () => {
@@ -59,6 +59,12 @@ const useMap = () => {
   onUnmounted(() => window.onresize = () => {})
   
   watch(markersToDisplay, v => console.log(v))
+
+  watch(isEditingMode, (isEditing: boolean) => {
+    if (isEditing) attachMarkerToMouseMove(MapContainer.value, defaultMarkerIcon)
+    else detachMarkerFromMouseMove(MapContainer.value)
+  })
+
   return {
     activeFiltersValues,
     created,
@@ -74,7 +80,7 @@ const useMap = () => {
     handleNewMarkerCoords,
     newMarkerCoords,
     disableEditingMode,
-    markers
+    markers,
   }
 }
 

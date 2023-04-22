@@ -117,20 +117,20 @@ const mapStore = () => {
       activeFiltersValues.value.includes(type))
     return isVisible
   }
-  // watch([ markers, activeFilters ], () => {
-  //   if (findFilterByValue(FilterValues.all)?.isActive)
-  //     markersToDisplay.value = markers.value
-  //   else markersToDisplay.value = markers.value.filter(isMarkerVisible)
-  // })
-
-  watch([activeFilters], () => {
+  watch([ markers, activeFilters ], () => {
     if (findFilterByValue(FilterValues.all)?.isActive)
-      markers.value = markers.value.map(marker => ({ ...marker, isVisible: true }))
-    else markers.value = markers.value.map(marker => ({
-      ...marker, isVisible: isMarkerVisible(marker)
-    }))
-    console.log(markers.value)
+      markersToDisplay.value = markers.value
+    else markersToDisplay.value = markers.value.filter(isMarkerVisible)
   })
+
+  // watch([activeFilters], () => {
+  //   if (findFilterByValue(FilterValues.all)?.isActive)
+  //     markers.value = markers.value.map(marker => ({ ...marker, isVisible: true }))
+  //   else markers.value = markers.value.map(marker => ({
+  //     ...marker, isVisible: isMarkerVisible(marker)
+  //   }))
+  //   console.log(markers.value)
+  // })
 
   return {
     markers,

@@ -1,6 +1,7 @@
 <template>
   <div
     ref="MapContainer"
+    v-auto-animate="{ duration: 150 }"
     class="map-container"
   >
     <YandexMap
@@ -19,12 +20,10 @@
       v-on="isEditingMode ? { click: handleNewMarkerCoords } : {}"
     >
       <div
-        v-for="marker in markers"
+        v-for="marker in markersToDisplay"
         :key="marker._id"
       >
         <YandexMarker
-          v-if="marker.isVisible"
-          :is-visible="marker.isVisible"
           :marker-id="marker._id"
           :coordinates="marker.coords"
           :options="{
@@ -59,7 +58,22 @@
       />
     </YandexMap>
     <BaseButton
-      class="add-marker-button"
+      v-if="isEditingMode"
+      class="close-editing-mode"
+      variant="secondary"
+      icon
+      @click="disableEditingMode"
+    >
+      <template #appendIcon>
+        <img
+          src="@/assets/icons/close-icon.svg"
+          alt="close icon"
+        >
+      </template>
+    </BaseButton>
+    <BaseButton
+      v-else
+      class="add-marker"
       circle
       icon
       @click="isEditingMode = true"
@@ -73,12 +87,17 @@
       </template>
     </BaseButton>
     <div class="map-sidebar">
-      <MarkerCreationForm
-        v-if="isEditingMode"
-        :marker-coords="newMarkerCoords"
-        @created="disableEditingMode"
-      />
-      <MapFilters v-else />
+      <Transition
+        name="fade-in-bottom"
+        mode="out-in"
+      >
+        <MarkerCreationForm
+          v-if="isEditingMode"
+          :marker-coords="newMarkerCoords"
+          @created="disableEditingMode"
+        />
+        <MapFilters v-else />
+      </Transition>
     </div>
   </div>
 </template>

@@ -30,7 +30,7 @@
     z-index: 2;
   }
 
-  .add-marker-button {
+  .add-marker {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,7 +44,36 @@
     z-index: 10;
   }
 
+  .close-editing-mode {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    right: calc($map-filters-width + 20px);
+    z-index: 10;
+    :deep(.button) {
+      outline: 2px solid lightgray;
+    }
+  }
+
+  :deep(.floating-marker) {
+    position: absolute;
+    width: 34px;
+    height: 41px;
+    opacity: 0.7;
+    user-select: none;
+    pointer-events: none;
+  }
 }
-:deep(.hidden-marker) {
-  visibility: hidden;
+
+.fade-in-bottom {
+  &-enter-active,
+  &-leave-active {
+    transition: $default-transition;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateY(10%);
+    opacity: 0;
+  }
 }
