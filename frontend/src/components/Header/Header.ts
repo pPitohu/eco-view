@@ -1,5 +1,6 @@
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/UserStore'
+import { isLowerThan } from '@/utils/mobile'
 
 const useHeader = () => {
   const userStore = useUserStore()
@@ -7,7 +8,8 @@ const useHeader = () => {
 
   return {
     isProfileLoading,
-    isAuthorized
+    isAuthorized,
+    isLowerThan
   }
 }
 

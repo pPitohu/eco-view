@@ -1,5 +1,6 @@
 <template>
-  <header>
+  <BurgerMenu v-if="isLowerThan(1024)" />
+  <header v-else>
     <nav class="links">
       <router-link to="/map">
         Главная
@@ -15,7 +16,6 @@
       v-auto-animate="{ duration: 150 }"
       class="auth-menu"
     >
-      <!-- loader here -->
       <div v-if="isProfileLoading" />
       
       <ProfileMenu v-else-if="isAuthorized" />
@@ -34,12 +34,14 @@
 <script lang="ts">
 import BaseButton from '@/components/common/BaseButton/BaseButton.vue'
 import ProfileMenu from '@/components/ProfileMenu/ProfileMenu.vue'
+import BurgerMenu from './BurgerMenu/BurgerMenu.vue'
 import useHeader from './Header'
 
 export default {
   components: {
     BaseButton,
     ProfileMenu,
+    BurgerMenu
   },
   setup() {
     return useHeader()

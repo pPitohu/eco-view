@@ -17,6 +17,11 @@
         outline: 2px solid white;
       }
     }
+    &-text {
+      color: lightslategray;
+      font-weight: 500;
+      cursor: pointer;
+    }
     &-dropdown {
       position: absolute;
       top: 50px;

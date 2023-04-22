@@ -1,6 +1,7 @@
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/UserStore'
+import { isLowerThan } from '@/utils/mobile'
 
 const useProfileMenu = () => {
   const userStore = useUserStore()
@@ -16,7 +17,8 @@ const useProfileMenu = () => {
     isMenuOpen,
     toggleMenu,
     closeMenu,
-    user
+    user,
+    isLowerThan
   }
 }
 

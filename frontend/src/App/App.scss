@@ -1,35 +1,57 @@
-main:not(.auth-page) {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  min-height: inherit;
-  max-width: 1640px;
-  margin: 0 auto;
-  .navigation {
-    z-index: 3;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 1640px;
+main {
+  &:not(.auth-page) {
     display: flex;
-    justify-content: space-between;
-    gap: 35px;
-    .logo {
-      cursor: pointer;
-      margin-top: 35px;
-      margin-left: 30px;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-height: inherit;
+    max-width: 1640px;
+    margin: 0 auto;
+    .navigation {
+      z-index: 3;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1640px;
+      display: flex;
+      justify-content: space-between;
+      gap: 35px;
+      .logo {
+        cursor: pointer;
+        margin-top: 35px;
+        margin-left: 30px;
+      }
+    }
+
+    &.map-page {
+      padding-top: 170px;
+      .navigation {
+        z-index: 3;
+      }
     }
   }
 
-  &.map-page {
-    padding-top: 170px;
+  @media screen and (max-width: 768px) {
     .navigation {
-      z-index: 3;
+      .logo {
+        margin-top: 20px !important;
+        margin-left: 16px !important;
+        max-width: 120px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .navigation {
+      .logo {
+        max-width: 100px;
+      }
     }
   }
 }
+
+
   
 .fade-in-bottom {
   &-enter-active,

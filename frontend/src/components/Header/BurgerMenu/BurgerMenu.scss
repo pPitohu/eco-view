@@ -1,0 +1,72 @@
+:deep(.bm-cross) {
+  height: 18px !important;
+}
+:deep(.bm-menu) {
+  padding-top: 40px;
+  background: white;
+  border-radius: 20px 0 0 20px;
+  border-left: 2px solid $primaryColor;
+  margin-right: -2px;
+}
+:deep(.bm-item-list) {
+  height: 100%;
+  margin: 0;
+}
+
+.toggle-menu {
+  width: 40px;
+  margin-top: 40px;
+  height: 40px;
+  margin-right: 30px;
+  :deep(.button) {
+    outline: 2px solid $lightGreen;
+  }
+}
+
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 .7em 50px 30px;
+  position: relative;
+  .close-button {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    :deep(.button) {
+      outline: 2px solid lightgray;
+    }
+  }
+  .profile {
+    flex: 1 1 10%;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    flex: 1 0 90%;
+    min-width: 220px;
+    a {
+      color: #818181;
+      font-weight: 500;
+      &:before {
+        display: none;
+      }
+    }
+  }
+}
+
+.fade-in-right {
+  &-enter-active,
+  &-leave-active {
+    transition: $default-transition;
+  }
+  &-enter-from,
+  &-leave-to {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+}
