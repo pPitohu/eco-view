@@ -92,7 +92,7 @@ const mapStore = () => {
   }
 
   const markers = ref<Marker | any>([])
-  const markersToDisplay = ref([])
+  const markersToDisplay = ref<Marker | any>([])
 
   const modifyMarker = (marker: Marker) => {
     const setMarkerIcon = (marker: Marker) => {

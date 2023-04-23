@@ -23,7 +23,8 @@ const useMap = () => {
   const clickData = ref<any>()
 
   const setMapHeight = (mapContainer: Map['container']) => {
-    MapContainer.value.style.height = `${window.innerHeight - 170}px`
+    if (MapContainer.value)
+      MapContainer.value.style.height = `${window.innerHeight - 170}px`
     mapContainer.fitToViewport()
   }
 

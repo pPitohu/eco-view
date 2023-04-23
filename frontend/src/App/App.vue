@@ -23,13 +23,27 @@
         <Header />
       </Transition>
     </div>
-    <router-view v-show="!isPageHidden" />
+    <Transition name="fade-in-bottom">
+      <LeftMenu v-if="!$route.meta.shouldHideLeftMenu" />
+    </Transition>
+    <router-view
+      v-show="!isPageHidden"
+      v-slot="{ Component }"
+    >
+      <Transition
+        name="fade"
+        mode="out-in"
+      >
+        <component :is="Component" />
+      </Transition>
+    </router-view>
   </main>
 </template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import Header from '@/components/Header/Header.vue'
+import LeftMenu from '@/components/LeftMenu/LeftMenu.vue'
 import Loader from '@/components/Loader/Loader.vue'
 import { useUserStore } from '@/stores/UserStore'
 

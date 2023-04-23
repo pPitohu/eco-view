@@ -51,8 +51,6 @@ main {
   }
 }
 
-
-  
 .fade-in-bottom {
   &-enter-active,
   &-leave-active {
@@ -60,7 +58,18 @@ main {
   }
   &-enter-from,
   &-leave-to {
-    transform: translateY(-100%);
+    transform: translateY(-70%);
+    opacity: 0;
+  }
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: .1s ease-out;
+  }
+  &-enter-from,
+  &-leave-to {
     opacity: 0;
   }
 }

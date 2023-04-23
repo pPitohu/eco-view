@@ -8,21 +8,7 @@ export default () => {
   const env = loadEnv(process.env.MODE, process.cwd())
   return defineConfig({
     plugins: [
-      vue(),
-      // babel({
-      //   babelConfig: {
-      //     babelrc: false,
-      //     configFile: false,
-      //     presets: [
-      //       '@vue/cli-plugin-babel/preset',
-      //       '@babel/preset-env',
-      //     ],
-      //     plugins: [
-      //       '@babel/plugin-proposal-optional-chaining',
-      //       '@babel/plugin-proposal-nullish-coalescing-operator',
-      //     ],
-      //   },
-      // }),
+      vue()
     ],
     resolve: {
       alias: {

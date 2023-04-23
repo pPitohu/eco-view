@@ -22,7 +22,10 @@ const routes: RouteRecordRaw[] = [
     name: 'auth',
     redirect: { name: 'login' },
     component: Authorization,
-    meta: { shouldHideHeader: true },
+    meta: {
+      shouldHideHeader: true,
+      shouldHideLeftMenu: true
+    },
     children: [
       {
         path: 'login',
@@ -46,7 +49,8 @@ const routes: RouteRecordRaw[] = [
     name: 'profile',
     component: Profile,
     meta: {
-      isPrivateRoute: true
+      isPrivateRoute: true,
+      shouldHideLeftMenu: true
     }
   }
 ]
