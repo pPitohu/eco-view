@@ -5,17 +5,18 @@
       'icon': icon,
       'circle': circle,
       'large': large,
+      'loading': isLoading,
       [variant]: true
     }"
   >
     <button
-      v-wave="!disabled"
+      v-wave="!disabled || isLoading"
       class="button"
       :class="{
         'appended-icon': $slots.appendIcon,
       }"
       :type="type"
-      :disabled="disabled"
+      :disabled="disabled || isLoading"
     >
       <span class="button-text">
         <slot />
@@ -23,6 +24,12 @@
       <div class="append-icon">
         <slot name="appendIcon" />
       </div>
+      <img
+        v-if="isLoading"
+        class="loading-icon"
+        src="@/assets/icons/loader.svg"
+        alt="loading"
+      >
     </button>
   </div>
 </template>
@@ -58,6 +65,11 @@ export default {
       default: false
     },
     icon: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isLoading: {
       type: Boolean,
       required: false,
       default: false

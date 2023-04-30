@@ -15,7 +15,7 @@ const mapStore = () => {
       name: 'Все',
       value: FilterValues.all,
       icon: fourSquares,
-      isActive: false,
+      isActive: true,
       activeColor: FilterColors.all,
       action: () => disableFiltersExcept(FilterValues.all)
     },
@@ -122,15 +122,6 @@ const mapStore = () => {
       markersToDisplay.value = markers.value
     else markersToDisplay.value = markers.value.filter(isMarkerVisible)
   })
-
-  // watch([activeFilters], () => {
-  //   if (findFilterByValue(FilterValues.all)?.isActive)
-  //     markers.value = markers.value.map(marker => ({ ...marker, isVisible: true }))
-  //   else markers.value = markers.value.map(marker => ({
-  //     ...marker, isVisible: isMarkerVisible(marker)
-  //   }))
-  //   console.log(markers.value)
-  // })
 
   return {
     markers,

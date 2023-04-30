@@ -26,6 +26,7 @@
         />
         <BaseButton
           :disabled="!meta.valid"
+          :is-loading="isLoading"
           class="login-form__button"
           large
           type="submit"

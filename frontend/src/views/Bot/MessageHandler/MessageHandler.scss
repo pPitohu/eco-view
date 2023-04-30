@@ -1,0 +1,29 @@
+.message-handler {
+  position: relative;
+  &__textarea {
+    width: 100%;
+    outline: none;
+    background: rgba(173, 244, 222, 0.75);
+    padding: 20px 125px 20px 30px;
+    border: none;
+    border-radius: 20px;
+    font-size: 22px;
+    transition: $default-transition;
+    &[disabled] {
+      filter: brightness(.9);
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+  &__send-button {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    transform: translateY(-40%);
+    width: 84px;
+    height: 84px;
+    :deep(.send-icon) {
+      width: 44px !important;
+    }
+  }
+}

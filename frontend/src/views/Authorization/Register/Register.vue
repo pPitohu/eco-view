@@ -40,6 +40,7 @@
         />
         <BaseButton
           :disabled="!meta.valid"
+          :is-loading="isLoading"
           class="register-form__button"
           large
           type="submit"

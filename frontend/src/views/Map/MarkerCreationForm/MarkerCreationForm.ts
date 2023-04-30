@@ -8,6 +8,7 @@ const useMarkerCreationForm = (props, { emit }) => {
   const userStore = useUserStore()
   const mapStore = useMapStore()
   const shouldShowError = ref(false)
+  const isLoading = ref(false)
 
   const garbageType = {
     [FilterValues.paper]: 'Бумага',
@@ -28,6 +29,7 @@ const useMarkerCreationForm = (props, { emit }) => {
   const addMarker = async event => {
     shouldShowError.value = true
     if (selectedGarbageTypes.value.length === 0) return
+    isLoading.value = true
     
     await mapStore.addMarker({
       name: event.markerName,
@@ -37,6 +39,7 @@ const useMarkerCreationForm = (props, { emit }) => {
     })
 
     shouldShowError.value = false
+    isLoading.value = false
     emit('created')
   }
 
@@ -46,7 +49,8 @@ const useMarkerCreationForm = (props, { emit }) => {
     selectCheckbox,
     markerCreationFormValidator,
     addMarker,
-    shouldShowError
+    shouldShowError,
+    isLoading
   }
 }
 

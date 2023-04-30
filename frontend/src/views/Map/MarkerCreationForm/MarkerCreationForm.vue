@@ -44,6 +44,7 @@
       <BaseButton
         variant="danger"
         :disabled="!meta.valid"
+        :is-loading="isLoading"
         type="submit"
       >
         Сохранить

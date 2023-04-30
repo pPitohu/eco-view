@@ -4,6 +4,7 @@ import * as dotenv from 'dotenv'
 import express, { Application, NextFunction, Request, Response, Router } from 'express'
 import fileUpload from 'express-fileupload'
 import mongoose from 'mongoose'
+import BotRouter from './routes/bot'
 import MapRouter from './routes/map'
 import UserRouter from './routes/user'
 dotenv.config()
@@ -31,6 +32,7 @@ app.use((req: Request, res: Response, next: NextFunction): void => {
 
 router.use('/user', UserRouter)
 router.use('/map', MapRouter)
+router.use('/bot', BotRouter)
 
 app.use(router)
 

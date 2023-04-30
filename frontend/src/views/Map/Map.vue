@@ -24,6 +24,7 @@
         :key="marker._id"
       >
         <YandexMarker
+          v-if="!isEditingMode"
           :marker-id="marker._id"
           :coordinates="marker.coords"
           :options="{

@@ -1,14 +1,5 @@
 import Marker from '../models/Marker'
 
-enum ResponseTexts {
-  UserEmailAlreadyExists = 'Пользователь с таким email уже существует',
-  UserUsernameAlreadyExists = 'Пользователь с таким логином уже существует',
-  UnknownError = 'Неизвестная ошибка',
-  UserNotFound = 'Пользователь не найден',
-  PasswordIsInvalid = 'Неверный пароль',
-  InvalidData = 'Неверные данные'
-}
-
 export class MapService {
   public static getAllMarkers = async (isAdmin: boolean, email: string) => {
     const markersFilter = isAdmin ? {} : {
