@@ -12,5 +12,7 @@ UserRouter.post('/login', validate(loginSchema), UserController.login)
 UserRouter.get('/me', authorize([ UserRoles.USER, UserRoles.ADMIN ]), UserController.getMe)
 UserRouter.put('/image', authorize([ UserRoles.USER, UserRoles.ADMIN ]), UserController.updateImage)
 UserRouter.put('/credentials', validate(updateSchema), authorize([ UserRoles.USER, UserRoles.ADMIN ]), UserController.updateCredentials)
+UserRouter.post('/forgot-password/reset-message', UserController.sendResetMessage)
+UserRouter.post('/forgot-password/reset-password', UserController.resetPassword)
 
 export default UserRouter

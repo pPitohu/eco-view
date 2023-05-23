@@ -2,7 +2,7 @@
   <BurgerMenu v-if="isLowerThan(1024)" />
   <header v-else>
     <nav class="links">
-      <router-link to="/map">
+      <router-link to="/">
         Главная
       </router-link>
       <router-link to="/">

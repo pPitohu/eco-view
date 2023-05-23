@@ -30,13 +30,13 @@ export const registerFormValidator = yup.object({
   username: userNameRules,
   password: passwordRules,
   confirmPassword: yup.string().required('Обязательное поле').when('password', (password, field) =>
-    password ? field.required().oneOf([yup.ref('password')], 'Пароли не совпадают') : field),
+    password ? field.required('Обязательное поле').oneOf([yup.ref('password')], 'Пароли не совпадают') : field),
 })
 
 export const newPasswordFormValidator = yup.object({
   password: passwordRules,
   confirmPassword: yup.string().required('Обязательное поле').when('password', (password, field) =>
-    password ? field.required().oneOf([yup.ref('password')], 'Пароли не совпадают') : field),
+    password ? field.required('Обязательное поле').oneOf([yup.ref('password')], 'Пароли не совпадают') : field),
 })
 
 export const userNameFormValidator = yup.object({

@@ -51,5 +51,23 @@ export const UserService = {
     } catch (error) {
       return error.response
     }
+  },
+  sendResetMessage: async (email: string) => {
+    try {
+      const response = await instance.post('/user/forgot-password/reset-message', { email })
+      return response
+    } catch (error) {
+      console.log(error)
+      return error.response
+    }
+  },
+  resetPassword: async (passwordData: { email: string, password: string }) => {
+    try {
+      const response = await instance.post('/user/forgot-password/reset-password', passwordData)
+      return response
+    } catch (error) {
+      console.log(error)
+      return error.response
+    }
   }
 }

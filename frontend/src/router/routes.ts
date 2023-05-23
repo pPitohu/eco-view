@@ -1,5 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router'
 import Authorization from '@/views/Authorization/Authorization.vue'
+import ForgotPassword from '@/views/Authorization/ForgotPassword/ForgotPassword.vue'
 import Login from '@/views/Authorization/Login/Login.vue'
 import Register from '@/views/Authorization/Register/Register.vue'
 import Bot from '@/views/Bot/Bot.vue'
@@ -46,7 +47,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'forgot-password',
         name: 'forgot-password',
-        component: () => { }
+        component: ForgotPassword
       }
     ]
   },

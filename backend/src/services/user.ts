@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import nodemailer from 'nodemailer'
 import { ApiError } from '../helpers/apiError'
 import { imagekit } from '../helpers/imagekit'
 import User from '../models/User'
@@ -130,5 +131,45 @@ export class UserService {
 
     const token = createToken(user.toJSON())
     return { token }
+  }
+
+  public static sendResetMessage = async body => {
+    const { email } = body
+
+    const user = await User.findOne({ email })
+    if (!user)
+      throw ApiError.BadRequest(ResponseTexts.UserNotFound)
+
+    const resetCode = Math.random().toString(36).substring(2)
+
+    const transporter = nodemailer.createTransport({
+      auth: {
+        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.EMAIL_USER
+      },
+      service: 'gmail'
+    })
+
+    await transporter.sendMail({
+      html: `
+        <div>
+          <h1 style="color: #48D9A4;">Eco View</h1>
+          <h2 style="font-weight: 400; font-size: 26px;">Ваш код для восстановления: <span style="font-weight: bold">${resetCode}</span></h2>
+          <p style="color: #c8c8c8;">Если вы не оставляли заявку на восстановление аккаунта, то проигнорируйте данное сообщение.</p>
+        </div>
+      `,
+      subject: 'Eco View | Восстановление пароля',
+      to: email
+    })
+
+    return { resetCode }
+  }
+
+  public static resetPassword = async body => {
+    const { email, password } = body
+    const user = await User.findOne({ email })
+    if (user)
+      user.password = await hashPassword(password)
+    return await user.save()
   }
 } 

@@ -89,6 +89,30 @@ const actions = {
       response,
       successStatus: 200
     })
+  },
+  
+  sendResetMessage: async (email: string) => {
+    const userStore = useUserStore()
+    const response = await UserService.sendResetMessage(email)
+    
+    const handleSuccessStatus = ({ resetCode }: { resetCode: string }) => {
+      userStore.resetCode = resetCode
+    }
+
+    handleResponse({
+      handleSuccessStatus,
+      response,
+      successStatus: 200
+    })
+  },
+
+  resetPassword: async (passwordData: { email: string, password: string }) => {
+    const response = await UserService.resetPassword(passwordData)
+
+    handleResponse({
+      response,
+      successStatus: 200
+    })
   }
 }
 

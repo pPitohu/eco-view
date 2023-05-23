@@ -19,6 +19,7 @@ const userStore = () => {
     }
   })
 
+  const resetCode = ref<string>()
   const isProfileLoading = ref(true)
   const isAuthorized = computed((): boolean => Boolean(user.value.id))
 
@@ -50,6 +51,7 @@ const userStore = () => {
     isProfileLoading,
     resetUserState,
     logout,
+    resetCode,
     ...actions
   }
 }

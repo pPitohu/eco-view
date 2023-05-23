@@ -48,4 +48,22 @@ export class UserController {
       handleError(res, e)
     }
   }
+
+  public static sendResetMessage = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      const response = await UserService.sendResetMessage(req.body)
+      return res.status(StatusCodes.Ok).json(response)
+    } catch (e) {
+      handleError(res, e)
+    }
+  }
+
+  public static resetPassword = async (req: Request, res: Response): Promise<Response> => {
+    try {
+      await UserService.resetPassword(req.body)
+      return res.status(StatusCodes.Ok).json()
+    } catch (e) {
+      handleError(res, e)
+    }
+  }
 }
