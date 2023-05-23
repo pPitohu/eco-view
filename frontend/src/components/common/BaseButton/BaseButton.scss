@@ -107,6 +107,11 @@
     }
   }
 
+  &.small .button {
+    height: 42px;
+    padding: 10px 20px;
+  }
+
   &.circle {
     border-radius: 100px;
     .button {

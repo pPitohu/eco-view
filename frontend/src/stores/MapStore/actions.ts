@@ -35,6 +35,46 @@ const actions = {
       response,
       successStatus: 201
     })
+  },
+
+  approveMarker: async (marker: Marker) => {
+    const mapStore = useMapStore()
+    mapStore.isApprovingMarker = true
+    const response = await MapService.approveMarker(marker._id)
+
+    const handleSuccessStatus = (newMarker: Marker) => {
+      const markerToUpdate = mapStore.markers.find(m => m._id === marker._id)
+      if (markerToUpdate) {
+        const modifiedMarker = mapStore.modifyMarker(newMarker)
+        Object.assign(markerToUpdate, modifiedMarker)
+      }
+    }
+
+    handleResponse({
+      handleSuccessStatus,
+      response,
+      successStatus: 200
+    })
+
+    mapStore.isApprovingMarker = false
+  },
+
+  deleteMarker: async (marker: Marker) => {
+    const mapStore = useMapStore()
+    mapStore.isDeletingMarker = true
+    const response = await MapService.deleteMarker(marker._id)
+
+    const handleSuccessStatus = () => {
+      mapStore.markers = mapStore.markers.filter(m => m._id !== marker._id)
+    }
+
+    handleResponse({
+      handleSuccessStatus,
+      response,
+      successStatus: 204
+    })
+
+    mapStore.isDeletingMarker = false
   }
 }
 

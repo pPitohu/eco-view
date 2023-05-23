@@ -1,7 +1,8 @@
+import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { markerCreationFormValidator } from '@/components/common/TextField/TextFieldRules'
-import { useMapStore } from '@/stores/MapStore' 
-import { FilterValues } from '@/stores/MapStore/types'
+import { markerCreationFormValidator } from '@/components/common/TextField/TextFieldRules' 
+import { useMapStore } from '@/stores/MapStore'
+import { ruGarbageType } from '@/stores/MapStore/types'
 import { useUserStore } from '@/stores/UserStore'
 
 const useMarkerCreationForm = (props, { emit }) => {
@@ -9,14 +10,7 @@ const useMarkerCreationForm = (props, { emit }) => {
   const mapStore = useMapStore()
   const shouldShowError = ref(false)
   const isLoading = ref(false)
-
-  const garbageType = {
-    [FilterValues.paper]: 'Бумага',
-    [FilterValues.plastic]: 'Пластик',
-    [FilterValues.metal]: 'Металл',
-    [FilterValues.glass]: 'Стекло',
-    [FilterValues.clothes]: 'Одежда'
-  }
+  const { isAuthorized } = storeToRefs(userStore)
 
   const selectedGarbageTypes = ref<string[]>([])
 
@@ -27,6 +21,7 @@ const useMarkerCreationForm = (props, { emit }) => {
   }
 
   const addMarker = async event => {
+    if (!isAuthorized.value) return
     shouldShowError.value = true
     if (selectedGarbageTypes.value.length === 0) return
     isLoading.value = true
@@ -44,13 +39,14 @@ const useMarkerCreationForm = (props, { emit }) => {
   }
 
   return {
-    garbageType,
+    ruGarbageType,
     selectedGarbageTypes,
     selectCheckbox,
     markerCreationFormValidator,
     addMarker,
     shouldShowError,
-    isLoading
+    isLoading,
+    isAuthorized
   }
 }
 

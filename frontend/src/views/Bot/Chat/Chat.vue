@@ -11,7 +11,7 @@
     >
       <img
         class="message-image"
-        :class="{ 'hidden': isMessageFromTheSameAuthor(message.author, index - 1) }"
+        :class="{ 'message-image_hidden': isMessageFromTheSameAuthor(message.author, index - 1) }"
         :src="isMyMessage(message)
           ? user.image.imageLink
           : accountPlugImage"

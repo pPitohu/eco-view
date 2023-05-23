@@ -1,9 +1,9 @@
 import Marker from '../models/Marker'
 
 export class MapService {
-  public static getAllMarkers = async (isAdmin: boolean, email: string) => {
+  public static getAllMarkers = async (isAdmin?: boolean, email?: string) => {
     const markersFilter = isAdmin ? {} : {
-      $or: [{ status: 'approved' }, { author: email }]
+      $or: [{ approvalStatus: 'approved' }, { author: email }]
     }
     const markers = await Marker.find(markersFilter)
 
@@ -17,5 +17,16 @@ export class MapService {
     })
 
     return marker
+  }
+
+  public static approveMarker = async (markerId: string) => {
+    const marker = await Marker.findById(markerId)
+    marker.approvalStatus = 'approved'
+    await marker.save()
+    return marker
+  }
+
+  public static deleteMarker = async (markerId: string) => {
+    return await Marker.deleteOne({ _id: markerId })
   }
 } 

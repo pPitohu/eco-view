@@ -19,7 +19,7 @@
         <p>Вид отходов:</p>
         <div class="checkbox-wrapper">
           <div
-            v-for="([key, value]) in Object.entries(garbageType)"
+            v-for="([key, value]) in Object.entries(ruGarbageType)"
             :key="value"
             v-auto-animate="{ duration: 100 }"
             class="checkbox"
@@ -43,7 +43,7 @@
       </div>
       <BaseButton
         variant="danger"
-        :disabled="!meta.valid"
+        :disabled="!meta.valid || !isAuthorized"
         :is-loading="isLoading"
         type="submit"
       >

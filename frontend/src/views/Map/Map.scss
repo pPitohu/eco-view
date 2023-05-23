@@ -8,7 +8,78 @@
 }
 
 :deep(.yandex-balloon) {
-  min-height: 200px;
+  width: 350px;
+  height: 300px;
+}
+:deep([class*="-balloon"]) {
+  border-radius: 15px;
+}
+
+:deep(.balloon) {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .marker-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 24px;
+    
+    &__icon {
+      width: 34px;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 8px;
+      .marker-name {
+        max-width: 280px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        line-height: 1;
+        color: $lightGreen;
+        text-shadow: 0 0 3px #0cffb794;
+      }
+      .marker-author {
+        font-size: 14px;
+        font-weight: 400;
+        color: #c8c8c8;
+      }
+    }
+  }
+  .marker-garbage {
+    flex: 1 1 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-block: 10px;
+    &__type {
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      &-checkmark {
+        max-width: 24px;
+        margin-right: 10px;
+      }
+      list-style: none;
+    }
+  }
+  .marker-coords {
+    color: #c8c8c8;
+  }
+  .marker-approval {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    & > * {
+      width: 100%;
+    }
+  }
 }
 
 .map-container {

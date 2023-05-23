@@ -113,14 +113,14 @@ export class UserService {
       const isUserUsernameExists = await User.findOne({ username })
       if (isUserUsernameExists)
         throw ApiError.BadRequest(ResponseTexts.UserUsernameAlreadyExists)
-      user.username = username
+      user.username = username.trim()
     }
 
     if (email) {
       const isUserEmailExists = await User.findOne({ email: email.toLowerCase() })
       if (isUserEmailExists)
         throw ApiError.BadRequest(ResponseTexts.UserEmailAlreadyExists)
-      user.email = email.toLowerCase()
+      user.email = email.trim().toLowerCase()
     }
     
     if (password)

@@ -53,3 +53,11 @@ export const MarkerIcons = {
   [FilterValues.clothes]: pinkMarkerIcon,
   'gray': grayMarkerIcon,
 }
+
+export const ruGarbageType = {
+  [FilterValues.paper]: 'Бумага',
+  [FilterValues.plastic]: 'Пластик',
+  [FilterValues.metal]: 'Металл',
+  [FilterValues.glass]: 'Стекло',
+  [FilterValues.clothes]: 'Одежда'
+}

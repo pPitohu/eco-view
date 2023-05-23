@@ -1,47 +1,54 @@
 import { storeToRefs } from 'pinia'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { onUnmounted, ref, watch } from 'vue'
 import { loadYmap } from 'vue-yandex-maps'
 import defaultMarkerIcon from '@/assets/icons/default-marker-icon.svg'
 import { YmapSettings } from '@/main'
 import { useMapStore } from '@/stores/MapStore'
 import type { Marker } from '@/stores/MapStore/types'
+import { ruGarbageType } from '@/stores/MapStore/types'
+import { useUserStore } from '@/stores/UserStore'
+import { UserRoles } from '@/stores/UserStore/types'
 import { attachMarkerToMouseMove, detachMarkerFromMouseMove } from '@/utils/floatingMarkerMouseMove'
 import type { Map } from 'yandex-maps'
 
 const MinskCoordinates = [ 53.902287, 27.561824 ]
 
 const useMap = () => {
+  const userStore = useUserStore()
   const mapStore = useMapStore()
 
   const isEditingMode = ref(false)
   const newMarkerCoords = ref<number[]>([])
 
-  const { activeFiltersValues, markers, markersToDisplay } = storeToRefs(mapStore)
-  const { isMarkerVisible, loadMarkers } = mapStore
+  const { isAuthorized, user } = storeToRefs(userStore)
+  const {
+    activeFiltersValues,
+    isApprovingMarker,
+    isDeletingMarker,
+    markers,
+    markersToDisplay
+  } = storeToRefs(mapStore)
+  const { approveMarker, deleteMarker, isMarkerVisible, loadMarkers } = mapStore
 
   const MapContainer = ref()
   const clickData = ref<any>()
 
-  const setMapHeight = (mapContainer: Map['container']) => {
+  const setMapHeight = () => {
     if (MapContainer.value)
       MapContainer.value.style.height = `${window.innerHeight - 170}px`
-    mapContainer.fitToViewport()
   }
 
   const created = async (map: Map) => {
     await loadYmap(YmapSettings)
     await loadMarkers()
 
-    setMapHeight(map.container)
-    window.onresize = () => setMapHeight(map.container)
+    setMapHeight()
+    window.onresize = () => setMapHeight()
   }
 
   const handleMarkerClick = async (event, marker: Marker) => {
     const m = await ymaps.geocode(marker.coords, { results: 1 })
     clickData.value = m.geoObjects.get(0).properties.get('name', { d: 'error' })
-  }
-
-  const handleUpdatedGeoObjects = (mapGeoObjects: Map['geoObjects']) => {
   }
 
   const handleNewMarkerCoords = event => {
@@ -53,13 +60,12 @@ const useMap = () => {
     newMarkerCoords.value = []
     isEditingMode.value = false
   }
-  
-  onMounted(async () => {
-  })
+
+  const isMarkerPendingApproval = (marker: Marker) => {
+    return marker.approvalStatus === 'pending' && user.value.role === UserRoles.ADMIN
+  }
   
   onUnmounted(() => window.onresize = () => {})
-  
-  watch(markersToDisplay, v => console.log(v))
 
   watch(isEditingMode, (isEditing: boolean) => {
     if (isEditing) attachMarkerToMouseMove(MapContainer.value, defaultMarkerIcon)
@@ -67,6 +73,8 @@ const useMap = () => {
   })
 
   return {
+    isAuthorized,
+    ruGarbageType,
     activeFiltersValues,
     created,
     MinskCoordinates,
@@ -74,7 +82,6 @@ const useMap = () => {
     handleMarkerClick,
     MapContainer,
     markersToDisplay,
-    handleUpdatedGeoObjects,
     isMarkerVisible,
     isEditingMode,
     defaultMarkerIcon,
@@ -82,6 +89,11 @@ const useMap = () => {
     newMarkerCoords,
     disableEditingMode,
     markers,
+    isMarkerPendingApproval,
+    approveMarker,
+    deleteMarker,
+    isApprovingMarker,
+    isDeletingMarker
   }
 }
 

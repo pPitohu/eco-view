@@ -6,6 +6,7 @@
       'circle': circle,
       'large': large,
       'loading': isLoading,
+      'small': small,
       [variant]: true
     }"
   >
@@ -70,6 +71,11 @@ export default {
       default: false
     },
     isLoading: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    small: {
       type: Boolean,
       required: false,
       default: false

@@ -5,7 +5,9 @@ import { authorize } from '../middlewares/authorize'
 
 const MapRouter = express.Router()
 
-MapRouter.get('/markers/all', authorize([ UserRoles.USER, UserRoles.ADMIN ]), MapController.getAllMarkers)
+MapRouter.get('/markers/all', MapController.getAllMarkers)
 MapRouter.post('/markers/add', authorize([ UserRoles.USER, UserRoles.ADMIN ]), MapController.addMarker)
+MapRouter.post('/markers/approve', authorize([UserRoles.ADMIN]), MapController.approveMarker)
+MapRouter.post('/markers/delete', authorize([UserRoles.ADMIN]), MapController.deleteMarker)
 
 export default MapRouter

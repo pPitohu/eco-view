@@ -10,48 +10,109 @@
       :controls="['geolocationControl']"
       :options="{
         restrictMapArea: [
-          [54.007462191413666, 27.293045893761068],
-          [53.75267738032513, 27.92407311544074],
+          [54.3171795,26.7150761],
+          [53.6433875,28.2391009],
         ],
         suppressMapOpenBlock: true,
+        yandexMapDisablePoiInteractivity: true,
+        suppressObsoleteBrowserNotifier: true,
+        autoFitToViewport: 'always'
       }"
       @created="created"
-      @geo-objects-updated="handleUpdatedGeoObjects"
       v-on="isEditingMode ? { click: handleNewMarkerCoords } : {}"
     >
-      <div
-        v-for="marker in markersToDisplay"
-        :key="marker._id"
-      >
-        <YandexMarker
-          v-if="!isEditingMode"
-          :marker-id="marker._id"
-          :coordinates="marker.coords"
-          :options="{
-            balloonPanelMaxMapArea: 0,
-            balloonOffset: [0, -15],
-            iconLayout: 'default#image',
-            iconImageHref: marker.icon,
-            imageSize: [34, 41]
-          }"
-          @click="$event => handleMarkerClick($event, marker)"
+      <YandexClusterer>
+        <div
+          v-for="marker in markersToDisplay"
+          :key="marker._id"
         >
-          <template #component>
-            <div>
-              {{ clickData }}
-              {{ marker._id }}
-              {{ marker.garbageType }}
-            </div>
-          </template>
-        </YandexMarker>
-      </div>
+          <YandexMarker
+            v-if="!isEditingMode"
+            :marker-id="marker._id"
+            :coordinates="marker.coords"
+            :options="{
+              balloonPanelMaxMapArea: 0,
+              balloonOffset: [0, -25],
+              iconOffset: [-5, 0],
+              iconLayout: 'default#image',
+              iconImageHref: marker.icon,
+              imageSize: [34, 41],
+              hideIconOnBalloonOpen: false
+            }"
+            @click="$event => handleMarkerClick($event, marker)"
+          >
+            <template #component>
+              <div class="balloon">
+                <h2 class="marker-heading">
+                  <img
+                    class="marker-heading__icon"
+                    :src="marker.icon"
+                    alt="marker icon"
+                  >
+                  <div class="marker-heading__content">
+                    <span
+                      class="marker-name"
+                      :title="marker.name"
+                    >{{ marker.name }}</span>
+                    <p class="marker-author">
+                      от {{ marker.author }}
+                    </p>
+                  </div>
+                </h2>
+                <ul class="marker-garbage">
+                  <li
+                    v-for="garbageType in marker.garbageType"
+                    :key="garbageType"
+                    class="marker-garbage__type"
+                  >
+                    <img
+                      width="24"
+                      class="marker-garbage__type-checkmark"
+                      src="@/assets/icons/double-checkmarks.svg"
+                      alt="checkmark"
+                    >
+                    <span>{{ ruGarbageType[garbageType] }}</span>
+                  </li>
+                </ul>
+                <p class="marker-coords">
+                  координаты:<br> {{ marker.coords.toString()
+                    .replaceAll('[', '').replaceAll(']', '') }}
+                </p>
+                <div
+                  v-if="isMarkerPendingApproval(marker)"
+                  class="marker-approval"
+                >
+                  <BaseButton
+                    small  
+                    class="approve"
+                    variant="primary"
+                    :is-loading="isApprovingMarker"
+                    @click="approveMarker(marker)"
+                  >
+                    Сохранить
+                  </BaseButton>
+                  <BaseButton
+                    small
+                    class="cancel"
+                    variant="danger"
+                    :is-loading="isDeletingMarker"
+                    @click="deleteMarker(marker)"
+                  >
+                    Удалить
+                  </BaseButton>
+                </div>
+              </div>
+            </template>
+          </YandexMarker>
+        </div>
+      </YandexClusterer>
       <YandexMarker
         v-if="isEditingMode && newMarkerCoords"
         marker-id="1488"
         :coordinates="newMarkerCoords"
         :options="{
           balloonPanelMaxMapArea: 0,
-          balloonOffset: [0, -15],
+          iconOffset: [-5, 0],
           iconLayout: 'default#image',
           iconImageHref: defaultMarkerIcon,
           imageSize: [34, 41]
@@ -74,10 +135,13 @@
     </BaseButton>
     <BaseButton
       v-else
+      :disabled="!isAuthorized"
       class="add-marker"
       circle
       icon
-      @click="isEditingMode = true"
+      v-on="isAuthorized ? {
+        click: () => isEditingMode = true
+      } : {}"
     >
       <template #appendIcon>
         <img
@@ -113,7 +177,7 @@ export default {
   components: {
     MapFilters,
     BaseButton,
-    MarkerCreationForm
+    MarkerCreationForm,
   },
   setup() {
     return useMap()

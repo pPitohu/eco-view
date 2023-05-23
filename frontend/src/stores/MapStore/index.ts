@@ -91,8 +91,10 @@ const mapStore = () => {
       filter.isActive = false
   }
 
-  const markers = ref<Marker | any>([])
-  const markersToDisplay = ref<Marker | any>([])
+  const isApprovingMarker = ref(false)
+  const isDeletingMarker = ref(false)
+  const markers = ref<Marker[]>([])
+  const markersToDisplay = ref<Marker[]>([])
 
   const modifyMarker = (marker: Marker) => {
     const setMarkerIcon = (marker: Marker) => {
@@ -136,6 +138,8 @@ const mapStore = () => {
     isMarkerVisible,
     modifyMarker,
     modifyMarkers,
+    isApprovingMarker,
+    isDeletingMarker,
     ...actions
   }
 }
