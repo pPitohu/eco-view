@@ -1,0 +1,114 @@
+.user-guide {
+  background: white;
+  width: 100%;
+  max-width: calc(100% - 266px);
+  margin-right: 35px;
+  margin-top: 170px;
+  border-radius: 12px;
+  padding: 30px;
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: -2;
+    transition: $default-transition;
+    transition-duration: .1;
+    &.visible {
+      opacity: 0.5;
+      z-index: 99;
+    }
+  }
+  .heading {
+    color: $lightGreen;
+    font-size: 42px;
+    line-height: 56px;
+    margin-bottom: 100px;
+  }
+  .text {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 50px;
+  }
+
+  &__item {
+    margin: 0 auto;
+    max-width: 1100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 20px;
+    margin-bottom: 70px;
+    &:nth-child(2n + 1) {
+      flex-direction: row-reverse;
+      .item-content {
+        text-align: right;
+      }
+      &:before, &:after {
+        left: 0;
+        right: auto;
+      }
+    }
+    .item-img {
+      width: 100%;
+      max-width: 500px;
+      min-width: 380px;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      .small-img {
+        width: 100%;
+        transition: $default-transition;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .big-img {
+        position: fixed;
+        width: 70%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 10px;
+        transition: $default-transition;
+        z-index: -2;
+        transition-duration: .1;
+        &.visible {
+          transform: translate(-50%, -50%) scale(1);
+          z-index: 999;
+        }
+      }
+    }
+    .item-content {
+      &__title {
+        font-size: 32px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        color: $lightGreen;
+      }
+      &__description {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+    &:after, &:before {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: $lightGreen;
+      position: absolute;
+      bottom: -15px;
+      right: 0;
+      border-radius: 10px;
+    }
+    &:before {
+      width: 50px;
+      bottom: -5px;
+    }
+  }
+}

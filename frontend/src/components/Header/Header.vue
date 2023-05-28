@@ -11,7 +11,7 @@
       <router-link to="/sorting-rules">
         Сортируй правильно!
       </router-link>
-      <router-link to="/">
+      <router-link to="/user-guide">
         Руководство пользователя
       </router-link>
     </nav>

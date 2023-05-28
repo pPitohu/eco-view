@@ -14,7 +14,8 @@
       circle
       icon
       :is-loading="isLoading"
-      @click="$emit('sendMessage', currentMessage)"
+      :disabled="disabled"
+      v-on="disabled ? {} : { click: () => $emit('sendMessage', currentMessage) }"
     >
       <template #appendIcon>
         <img

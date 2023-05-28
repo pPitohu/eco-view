@@ -2,7 +2,7 @@
   <div class="bot">
     <Chat />
     <MessageHandler
-      :disabled="!isInitialMessagesLoaded"
+      :disabled="!isInitialMessagesLoaded || !isAuthorized"
       :is-loading="isMessageSending"
       @sendMessage="sendMessage($event)"
     />

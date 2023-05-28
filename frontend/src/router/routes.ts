@@ -8,6 +8,7 @@ import Home from '@/views/Home/Home.vue'
 import Map from '@/views/Map/Map.vue'
 import Profile from '@/views/Profile/Profile.vue'
 import SortingRules from '@/views/SortingRules/SortingRules.vue'
+import UserGuide from '@/views/UserGuide/UserGuide.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -65,6 +66,11 @@ const routes: RouteRecordRaw[] = [
     path: '/sorting-rules',
     name: 'sorting-rules',
     component: SortingRules,
+  },
+  {
+    path: '/user-guide',
+    name: 'user-guide',
+    component: UserGuide
   }
 ]
 
