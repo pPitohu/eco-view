@@ -41,10 +41,10 @@
           </BaseButton>
         </Transition>
         <div class="links">
-          <router-link to="/map">
+          <router-link to="/">
             Главная
           </router-link>
-          <router-link to="/">
+          <router-link to="/sorting-rules">
             Сортируй правильно!
           </router-link>
           <router-link to="/">

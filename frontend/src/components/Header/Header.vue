@@ -1,11 +1,14 @@
 <template>
   <BurgerMenu v-if="isLowerThan(1024)" />
-  <header v-else>
+  <header
+    v-else
+    :class="{'hide': isHeaderHidden}"
+  >
     <nav class="links">
       <router-link to="/">
         Главная
       </router-link>
-      <router-link to="/">
+      <router-link to="/sorting-rules">
         Сортируй правильно!
       </router-link>
       <router-link to="/">

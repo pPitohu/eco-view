@@ -9,6 +9,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: $default-transition;
+
+  &.hide {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
   
   .links {
     display: flex;

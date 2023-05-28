@@ -7,6 +7,7 @@ import Bot from '@/views/Bot/Bot.vue'
 import Home from '@/views/Home/Home.vue'
 import Map from '@/views/Map/Map.vue'
 import Profile from '@/views/Profile/Profile.vue'
+import SortingRules from '@/views/SortingRules/SortingRules.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -59,6 +60,11 @@ const routes: RouteRecordRaw[] = [
       isPrivateRoute: true,
       shouldHideLeftMenu: true
     }
+  },
+  {
+    path: '/sorting-rules',
+    name: 'sorting-rules',
+    component: SortingRules,
   }
 ]
 
