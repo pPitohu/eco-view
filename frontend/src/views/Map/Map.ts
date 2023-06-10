@@ -31,7 +31,7 @@ const useMap = () => {
   const { approveMarker, deleteMarker, isMarkerVisible, loadMarkers } = mapStore
 
   const MapContainer = ref()
-  const clickData = ref<any>()
+  const markerAddress = ref<any>()
 
   const setMapHeight = () => {
     if (MapContainer.value)
@@ -48,7 +48,7 @@ const useMap = () => {
 
   const handleMarkerClick = async (event, marker: Marker) => {
     const m = await ymaps.geocode(marker.coords, { results: 1 })
-    clickData.value = m.geoObjects.get(0).properties.get('name', { d: 'error' })
+    markerAddress.value = m.geoObjects.get(0).properties.get('name', { d: 'error' })
   }
 
   const handleNewMarkerCoords = event => {
@@ -78,7 +78,7 @@ const useMap = () => {
     activeFiltersValues,
     created,
     MinskCoordinates,
-    clickData,
+    markerAddress,
     handleMarkerClick,
     MapContainer,
     markersToDisplay,

@@ -1,10 +1,20 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
-const useMessageHandler = () => {
-  const currentMessage = ref<string>()
+const useMessageHandler = ({ emit }) => {
+  const currentMessage = ref<string>('')
+
+  const isMessageEmpty = computed(() => currentMessage.value?.trim() === '')
+
+  const handleSendClick = () => {
+    if (isMessageEmpty.value) return
+    emit('sendMessage', currentMessage.value)
+    currentMessage.value = ''
+  }
 
   return {
-    currentMessage
+    currentMessage,
+    handleSendClick,
+    isMessageEmpty
   }
 }
 

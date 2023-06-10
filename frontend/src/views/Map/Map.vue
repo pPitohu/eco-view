@@ -59,6 +59,9 @@
                     </p>
                   </div>
                 </h2>
+                <p class="marker-address">
+                  {{ markerAddress }}
+                </p>
                 <ul class="marker-garbage">
                   <li
                     v-for="garbageType in marker.garbageType"

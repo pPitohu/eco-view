@@ -17,5 +17,5 @@ export const BotService = {
     } catch (error) {
       return error.response
     }
-  },
+  }
 }

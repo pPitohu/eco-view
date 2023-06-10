@@ -7,18 +7,28 @@ const useBot = () => {
   const userStore = useUserStore()
   const botStore = useBotStore()
   const { messages } = storeToRefs(botStore)
-  const { isAuthorized } = storeToRefs(userStore)
+  const { isAuthorized, user } = storeToRefs(userStore)
   const { loadInitialMessages } = botStore
 
   const isInitialMessagesLoaded = ref(false)
   const isMessageSending = ref(false)
   
-  const sendMessage = (message: string) => {
+  const sendMessage = async (text: string) => {
     isMessageSending.value = true
-    console.log(message)
-    setTimeout(() => {
-      isMessageSending.value = false
-    }, 1000)
+
+    const message = {
+      text: text.trim(),
+      author: user.value.username!,
+      datetime: new Date().toLocaleString('ru-RU')
+    }
+
+    messages.value.push(message)
+
+    setTimeout(async () => {
+      await botStore.sendMessage(message)
+    }, 300)
+    
+    isMessageSending.value = false
   }
 
   onMounted(async () => {

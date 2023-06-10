@@ -1,6 +1,6 @@
 <template>
   <div
-    v-auto-animate="{ duration: 150 }"
+    ref="chatRef"
     class="chat"
   >
     <div

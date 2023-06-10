@@ -8,8 +8,12 @@ const actions = {
     const botStore = useBotStore()
     const response = await BotService.loadInitialMessages()
 
-    const handleSuccessStatus = (messages: Message[]) => {
-      botStore.messages = messages
+    const handleSuccessStatus = ({ messages, suggestedMessages }: {
+      messages: Message[],
+      suggestedMessages: string[]
+    }) => {
+      botStore.messages = messages,
+      botStore.suggestedMessages = suggestedMessages
     }
 
     handleResponse({
@@ -22,8 +26,12 @@ const actions = {
     const botStore = useBotStore()
     const response = await BotService.sendMessage(userMessage)
 
-    const handleSuccessStatus = (message: Message) => {
+    const handleSuccessStatus = ({ message, suggestedMessages }: {
+      message: Message,
+      suggestedMessages: string[]
+    }) => {
       botStore.messages.push(message)
+      botStore.suggestedMessages = suggestedMessages
     }
 
     handleResponse({
@@ -31,7 +39,7 @@ const actions = {
       response,
       successStatus: 200
     })
-  },
+  }
 }
 
 export default actions

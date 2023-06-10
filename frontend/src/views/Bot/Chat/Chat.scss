@@ -4,12 +4,33 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  padding-bottom: 50px;
+  overflow-y: auto;
+  transition: $default-transition;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    width: 10px;
+    background: rgba(0,0,0,0);
+  }
+  &::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 10px;
+    background: $base-gradient;
+    border: 1px solid $darken-blue;
+  }
   .message {
     display: flex;
     align-items: flex-start;
     gap: 25px;
     max-width: 800px;
+    margin-bottom: 30px;
+    opacity: 0;
+    animation: appear .15s ease-out forwards;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &-image {
       max-width: 60px;
       border-radius: 100px;
@@ -18,6 +39,7 @@
       }
     }
     &-text {
+      min-width: 180px;
       margin-top: 20px;
       position: relative;
       border-radius: 0 10px 10px 10px;
@@ -44,5 +66,16 @@
         }
       }
     }
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

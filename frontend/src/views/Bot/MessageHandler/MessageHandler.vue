@@ -7,15 +7,15 @@
       class="message-handler__textarea"
       placeholder="Сообщение..."
       :disabled="disabled || isLoading"
-      @keydown.enter.exact.prevent.stop="$emit('sendMessage', currentMessage)"
+      @keydown.enter.exact.prevent.stop="handleSendClick"
     >
     <BaseButton
       class="message-handler__send-button"
       circle
       icon
       :is-loading="isLoading"
-      :disabled="disabled"
-      v-on="disabled ? {} : { click: () => $emit('sendMessage', currentMessage) }"
+      :disabled="disabled || isMessageEmpty"
+      v-on="disabled ? {} : { click: handleSendClick }"
     >
       <template #appendIcon>
         <img
@@ -46,8 +46,8 @@ export default {
       required: true
     }
   },
-  setup() {
-    return useMessageHandler()
+  setup(_, context) {
+    return useMessageHandler(context)
   }
 }
 </script>

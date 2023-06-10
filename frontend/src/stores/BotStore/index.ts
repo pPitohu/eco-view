@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import actions from './actions'
-import type { Message, SuggestedMessage } from './types'
+import type { Message } from './types'
 
 const botStore = () => {
   const defaultAuthor = 'eco-view'
   const messages = ref<Message[]>([])
-  const suggestedMessages = ref<SuggestedMessage[]>([])
+  const suggestedMessages = ref<string[]>([])
 
   return {
     messages,

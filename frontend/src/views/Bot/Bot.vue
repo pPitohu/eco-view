@@ -6,7 +6,9 @@
       :is-loading="isMessageSending"
       @sendMessage="sendMessage($event)"
     />
-    <SuggestedMessages />
+    <SuggestedMessages
+      @sendMessage="sendMessage($event)"
+    />
   </div>
 </template>
 
